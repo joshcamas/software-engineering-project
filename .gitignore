@@ -8,7 +8,7 @@
 /bazel-out
 
 # dependencies
-*/node_modules
+*node_modules
 */.vs
 
 # profiling files
@@ -45,3 +45,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+/views
