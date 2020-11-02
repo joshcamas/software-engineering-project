@@ -1,11 +1,28 @@
 <div class="row justify-content-center">
-    <div>
+    <div class="shadow p-3 mb-5 bg-white rounded zoom event">
         <img src={{dataOutput[id].img}}>
     </div>
-    <div>
-        {{dataOutput[id].description}}
-    </div>
-    <div>
+    <header>
+        <h2 class="text-center">Description</h2>
+        <p class="font-italic">
+            {{dataOutput[id].description}}
+        </p>
+        <p>
+            {{dataOutput[id].creationDate}}
+        </p>
+        <div class="font-weight-bold">
+        </div><br>
+        <div class="text-center font-weight-bold">
+            {{dataOutput[id].startDate}}
+        </div>
+        <div class="text-center font-weight-bold">
+            {{dataOutput[id].endDate}}
+        </div><br>
+    </header>  
+<div>
+    <p class="text-center font-weight-bold">
         {{dataOutput[id].price}}
-    </div>
+    </p>    
+    <button class="btn btn-primary shadow p-3 mb-2 bg-primary text-white">GET TICKETS NOW</button>
+</div> 
 </div>
