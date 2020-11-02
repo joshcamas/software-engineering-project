@@ -1,17 +1,21 @@
 
 class ListEventsAPI
 {
-    constructor(app,database)
+    static Create(app,database)
     {
-        this.app = app;
-        this.database = database;
-    }
+        app = app;
+        database = database;
 
-    init()
-    {
-        this.app.get('/event/', function(req, res) {
-            res.send('Return Event Data Here');
+        app.get('/api/listevents', function(req, res) {
+
+            database.connection.query('SELECT * from events', function (error, results, fields) {
+                if (error) throw error;
+                res.send(results);
+              });
+
         });
     }
+
 }
+
 module.exports = { ListEventsAPI };

@@ -4,7 +4,9 @@ const port = 3000;
 const mysql = require('mysql');
 
 const db = require('./services/database');
-const listevents = require('./api/listevents');
+const listEventsAPI = require('./api/listevents');
+const createEventsAPI = require('./api/createevent');
+
 
 //Startup webserver
 
@@ -18,8 +20,8 @@ app.listen(port, () => {
 var database = new db.Database("localhost","admin","password123","tikit");
 database.createConnection(mysql);
 
-if(!database.testConnection())
-	return;
+database.connect()
 
 //Initialize API's
-new listevents.ListEventsAPI(app,database).init();
+listEventsAPI.ListEventsAPI.Create(app,database);
+createEventsAPI.CreateEventAPI.Create(app,database);
