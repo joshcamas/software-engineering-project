@@ -13,7 +13,7 @@ export class InventoryComponent implements OnInit {
   id: number;
 
   constructor(private route: ActivatedRoute) {
-    for (let i = 0; i < 20; i++){
+    for (let i = 0; i < 4; i++){
       this.walletEvents.push({
         event: this.data[i % 4].event
       })

@@ -1,7 +1,9 @@
 <app-nav-bar></app-nav-bar>
-<h1>Your Tik-its</h1>
+<h1>Your Tik-its</h1><br>
 <div *ngFor="let walletEvent of walletEvents">
     <div>
-        {{walletEvent.event}}
+        <button class="btn btn-primary shadow p-3 mb-4 bg-dark text-white">
+            {{walletEvent.event}}
+        </button>
     </div>
 </div>
