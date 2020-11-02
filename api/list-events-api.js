@@ -12,7 +12,7 @@ class ListEventsAPI
                 if (error) throw error;
                 res.send(results);
               });
-
+              
         });
     }
 

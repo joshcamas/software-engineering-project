@@ -3,9 +3,11 @@ const app = express();
 const port = 3000;
 const mysql = require('mysql');
 
-const db = require('./services/database');
-const listEventsAPI = require('./api/listevents');
-const createEventsAPI = require('./api/createevent');
+const db = require('./services/database-service');
+
+const ListEventsAPI = require('./api/list-events-api').ListEventsAPI;
+const CreateEventAPI = require('./api/create-event-api').CreateEventAPI;
+const GlobalInventoryAPI = require('./api/global-inventory-api').GlobalInventoryAPI;
 
 
 //Startup webserver
@@ -19,9 +21,9 @@ app.listen(port, () => {
 //Connect to database
 var database = new db.Database("localhost","admin","password123","tikit");
 database.createConnection(mysql);
-
 database.connect()
 
 //Initialize API's
-listEventsAPI.ListEventsAPI.Create(app,database);
-createEventsAPI.CreateEventAPI.Create(app,database);
+ListEventsAPI.Create(app,database);
+CreateEventAPI.Create(app,database);
+GlobalInventoryAPI.Create(app,database);

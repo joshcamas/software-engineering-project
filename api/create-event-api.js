@@ -1,6 +1,6 @@
 
-var CreateEventService = require('./../services/createevent').CreateEventService;
-var EventModel = require('./../models/event').EventModel;
+var CreateEventService = require('../services/create-event-service').CreateEventService;
+var EventModel = require('../models/event-model').EventModel;
 
 class CreateEventAPI
 {
