@@ -9,6 +9,7 @@ import { AccountComponent } from './account/account.component';
 import { ScanComponent } from './scan/scan.component';
 import { EventComponent } from './event/event.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CarouselComponent } from './carousel/carousel.component';
     AccountComponent,
     ScanComponent,
     EventComponent,
-    CarouselComponent
+    CarouselComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule,
