@@ -10,6 +10,9 @@ import { ScanComponent } from './scan/scan.component';
 import { EventComponent } from './event/event.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './data.service';
+
 
 @NgModule({
   declarations: [
@@ -24,9 +27,10 @@ import { InventoryComponent } from './inventory/inventory.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
