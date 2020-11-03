@@ -1,6 +1,6 @@
-## Tik-it: A ticket purchasing platform
+# Tik-it: A ticket purchasing platform
 
-# Creating MySQL database
+## Creating MySQL database
 First you must install MySQL on your computer. 
 
 Then create the database and user via:
