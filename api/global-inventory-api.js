@@ -12,7 +12,6 @@ class GlobalInventoryAPI
                 if (error) throw error;
                 res.send(results);
               });
-              
         });
     }
 

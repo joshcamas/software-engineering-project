@@ -1,3 +1,4 @@
+import { QrcodeComponent } from './qrcode/qrcode.component';
 import { EventComponent } from './event/event.component';
 import { HomeComponent } from './home/home.component';
 import { AccountComponent } from './account/account.component'
@@ -9,7 +10,8 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'account', component: AccountComponent},
   {path: 'event/:id', component: EventComponent},
-  {path: 'inventory', component: InventoryComponent}
+  {path: 'inventory', component: InventoryComponent},
+  {path: 'qrcode', component: QrcodeComponent}
 ];
 
 @NgModule({

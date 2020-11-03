@@ -12,6 +12,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
+import { QrcodeComponent } from './qrcode/qrcode.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DataService } from './data.service';
     ScanComponent,
     EventComponent,
     CarouselComponent,
-    InventoryComponent
+    InventoryComponent,
+    QrcodeComponent
   ],
   imports: [
     BrowserModule,
