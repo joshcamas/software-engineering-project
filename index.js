@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const mysql = require('mysql');
+const cors = require('cors');
 
 const db = require('./services/database-service');
 
@@ -13,6 +14,7 @@ const GlobalInventoryAPI = require('./api/global-inventory-api').GlobalInventory
 //Startup webserver
 
 app.use(express.static('views'));
+app.use(cors());
 
 app.listen(port, () => {
   console.log(`Tikit Server at http://localhost:${port}`)
