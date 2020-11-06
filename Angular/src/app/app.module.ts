@@ -10,6 +10,7 @@ import { ScanComponent } from './scan/scan.component';
 import { EventComponent } from './event/event.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { PurchaseComponent } from './purchase/purchase.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { InventoryComponent } from './inventory/inventory.component';
     ScanComponent,
     EventComponent,
     CarouselComponent,
-    InventoryComponent
+    InventoryComponent,
+    PurchaseComponent
   ],
   imports: [
     BrowserModule,
