@@ -2,13 +2,20 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const mysql = require('mysql');
+const cors = require('cors');
 
-const db = require('./services/database');
-const listevents = require('./api/listevents');
+const db = require('./services/database-service');
+
+const ListEventsAPI = require('./api/list-events-api').ListEventsAPI;
+const CreateEventAPI = require('./api/create-event-api').CreateEventAPI;
+const GlobalInventoryAPI = require('./api/global-inventory-api').GlobalInventoryAPI;
+const GetEventAPI = require('./api/get-event-api').GetEventAPI;
+
 
 //Startup webserver
 
 app.use(express.static('views'));
+app.use(cors());
 
 app.listen(port, () => {
   console.log(`Tikit Server at http://localhost:${port}`)
@@ -17,9 +24,10 @@ app.listen(port, () => {
 //Connect to database
 var database = new db.Database("localhost","admin","password123","tikit");
 database.createConnection(mysql);
-
-if(!database.testConnection())
-	return;
+database.connect()
 
 //Initialize API's
-new listevents.ListEventsAPI(app,database).init();
+ListEventsAPI.Create(app,database);
+CreateEventAPI.Create(app,database);
+GlobalInventoryAPI.Create(app,database);
+GetEventAPI.Create(app, database);

@@ -1,5 +1,5 @@
 
-//Database class
+//Database Wrapper
 class Database
 {
 	constructor(host,user,password,database)
@@ -21,22 +21,20 @@ class Database
 		});
 	}
 	
-	destroy()
-	{
-		if(this.connection)
-			this.connection.destroy();
-	}
-	
-	testConnection()
+	connect()
 	{
 		this.connection.connect(function(err) {
 			if (err) {
                 console.error('Connection Error: ' + err.message);
-                return false;
 			}
             console.log('Connected to the MySQL server.');
-            return true;
 		});
+	}
+	
+	destroy()
+	{
+		if(this.connection)
+			this.connection.destroy();
 	}
 	
 }

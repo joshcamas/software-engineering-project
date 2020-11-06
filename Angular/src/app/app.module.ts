@@ -10,7 +10,14 @@ import { ScanComponent } from './scan/scan.component';
 import { EventComponent } from './event/event.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { InventoryComponent } from './inventory/inventory.component';
+<<<<<<< HEAD
 import { PurchaseComponent } from './purchase/purchase.component';
+=======
+import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './data.service';
+import { QrcodeComponent } from './qrcode/qrcode.component';
+
+>>>>>>> f63f3768e7dce52341dd619ed389fe0e65ce8fda
 
 @NgModule({
   declarations: [
@@ -22,13 +29,18 @@ import { PurchaseComponent } from './purchase/purchase.component';
     EventComponent,
     CarouselComponent,
     InventoryComponent,
+<<<<<<< HEAD
     PurchaseComponent
+=======
+    QrcodeComponent
+>>>>>>> f63f3768e7dce52341dd619ed389fe0e65ce8fda
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

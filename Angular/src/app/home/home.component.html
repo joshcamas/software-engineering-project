@@ -2,21 +2,16 @@
 <br>
 <h4>Popular</h4><br>
 <h6>Trending Now</h6>
-<div *ngFor="let events of eventListings; let i = index" class="row">
+<div class="row">
   <div *ngFor="let event of events" class="col-md-4">
     <div class="shadow p-3 mb-5 bg-white rounded zoom event">
       <div class="event-image text-center">
         <a [routerLink]="['/event', event.id]">
-          <img class="image-height" src="{{ event.img }}" />
+          <img class="img-fluid" src="{{'assets/Events/' + event.headerimg}}" />
         </a>
       </div>
       <div class="event-description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lacus
-        eros, ornare vitae placerat vel, posuere at nisl. Praesent fermentum
-        dolor in venenatis egestas.
-               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lacus
-        eros, ornare vitae placerat vel, posuere at nisl. Praesent fermentum
-        dolor in venenatis egestas.
+        {{event.shortdesc}}
       </div>
     </div>
   </div>
