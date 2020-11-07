@@ -16,6 +16,7 @@ import { DataService } from './data.service';
 import { QrcodeComponent } from './qrcode/qrcode.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { CreateaccountComponent } from './createaccount/createaccount.component'
     PurchaseComponent,
     QrcodeComponent,
     SignInComponent,
-    CreateaccountComponent
+    CreateaccountComponent,
+    ForgotpasswordComponent
   ],
   imports: [
     BrowserModule,

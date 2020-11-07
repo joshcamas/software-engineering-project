@@ -8,6 +8,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { PurchaseComponent } from './purchase/purchase.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path: 'purchase', component: PurchaseComponent},
   {path: 'qrcode', component: QrcodeComponent},
   {path: 'sign-in', component: SignInComponent},
-  {path: 'createaccount', component: CreateaccountComponent}
+  {path: 'createaccount', component: CreateaccountComponent},
+  {path: 'forgotpassword', component: ForgotpasswordComponent}
 ];
 
 @NgModule({
