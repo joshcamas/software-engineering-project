@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { InventoryComponent } from './inventory/inventory.component';
 import { PurchaseComponent } from './purchase/purchase.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'event/:id', component: EventComponent},
   {path: 'inventory', component: InventoryComponent},
   {path: 'purchase', component: PurchaseComponent},
-  {path: 'qrcode', component: QrcodeComponent}
+  {path: 'qrcode', component: QrcodeComponent},
+  {path: 'sign-in', component: SignInComponent}
 ];
 
 @NgModule({

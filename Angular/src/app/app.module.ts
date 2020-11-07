@@ -14,6 +14,7 @@ import { PurchaseComponent } from './purchase/purchase.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
 import { QrcodeComponent } from './qrcode/qrcode.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { QrcodeComponent } from './qrcode/qrcode.component';
     CarouselComponent,
     InventoryComponent,
     PurchaseComponent,
-    QrcodeComponent
+    QrcodeComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
