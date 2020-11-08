@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'account', component: AccountComponent},
   {path: 'event/:id', component: EventComponent},
-  {path: 'inventory', component: InventoryComponent},
+  {path: 'inventory/:id', component: InventoryComponent},
   {path: 'qrcode', component: QrcodeComponent}
 ];
 

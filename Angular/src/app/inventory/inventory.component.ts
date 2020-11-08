@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DataService } from '../data.service';
+import { InventoryData } from '../models/inventory.model';
 
 @Component({
   selector: 'app-inventory',
@@ -7,20 +9,19 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
-
-  data = [{event: "event1"}, {event: "event2"}, {event: "event3"}, {event: "event4"}]
-  walletEvents = [];
+  inventory: InventoryData[];
   id: number;
 
-  constructor(private route: ActivatedRoute) {
-    for (let i = 0; i < 4; i++){
-      this.walletEvents.push({
-        event: this.data[i % 4].event
-      })
-    }
+  constructor(private route: ActivatedRoute, private dataService: DataService) {
+    this.route.queryParams.subscribe(params => {
+      this.id = params.id;
+  });
   }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.dataService.getUserInventory(id)
+      .subscribe(data => this.inventory = data);
   }
 
 }

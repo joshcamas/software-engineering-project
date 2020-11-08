@@ -8,8 +8,8 @@ const db = require('./services/database-service');
 
 const ListEventsAPI = require('./api/list-events-api').ListEventsAPI;
 const CreateEventAPI = require('./api/create-event-api').CreateEventAPI;
-const GlobalInventoryAPI = require('./api/global-inventory-api').GlobalInventoryAPI;
 const GetEventAPI = require('./api/get-event-api').GetEventAPI;
+const GetInventoryApi = require('./api/get-inventory-api').GetInventoryAPI;
 
 
 //Startup webserver
@@ -29,5 +29,5 @@ database.connect()
 //Initialize API's
 ListEventsAPI.Create(app,database);
 CreateEventAPI.Create(app,database);
-GlobalInventoryAPI.Create(app,database);
 GetEventAPI.Create(app, database);
+GetInventoryApi.Create(app, database);
