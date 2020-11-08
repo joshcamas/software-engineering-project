@@ -10,9 +10,13 @@ import { ScanComponent } from './scan/scan.component';
 import { EventComponent } from './event/event.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { PurchaseComponent } from './purchase/purchase.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
 import { QrcodeComponent } from './qrcode/qrcode.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { CreateaccountComponent } from './createaccount/createaccount.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 
 @NgModule({
@@ -25,7 +29,11 @@ import { QrcodeComponent } from './qrcode/qrcode.component';
     EventComponent,
     CarouselComponent,
     InventoryComponent,
-    QrcodeComponent
+    PurchaseComponent,
+    QrcodeComponent,
+    SignInComponent,
+    CreateaccountComponent,
+    ForgotpasswordComponent
   ],
   imports: [
     BrowserModule,
