@@ -12,17 +12,13 @@
               <h5 class="card-title text-center">Sign In</h5>
               <form class="form-signin">
                 <div class="form-label-group">
-                  <input type="email" id="inputEmail" class="form-control" placeholder="email address" required autofocus>
+                  <label>Username:</label>
+                  <input type="text" id="username" class="form-control" placeholder="username" required autofocus>
                 </div><br>
-  
                 <div class="form-label-group">
-                  <input type="password" id="inputPassword" class="form-control" placeholder="password" required>
+                  <label>Password:</label>
+                  <input type="password" id="password" class="form-control" placeholder="password" required>
                 </div><br>
-  
-                <div class="etc-login-form">
-                    <p>forgot your password? <a routerLink="/forgotpassword" routerLinkActive="active">click here</a></p>
-                    <p>new user? <a routerLink="/createaccount" routerLinkActive="active">create new account</a></p>
-                </div>
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
                 <hr class="my-4">
               </form>
