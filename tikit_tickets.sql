@@ -16,29 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `inventory`
+-- Table structure for table `tickets`
 --
 
-DROP TABLE IF EXISTS `inventory`;
+DROP TABLE IF EXISTS `tickets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `inventory` (
+CREATE TABLE `tickets` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `event_id` int DEFAULT NULL,
-  `user_id` int DEFAULT NULL,
-  `purchase_date` date DEFAULT NULL,
+  `event_id` int NOT NULL,
+  `price` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `inventory`
+-- Dumping data for table `tickets`
 --
 
-LOCK TABLES `inventory` WRITE;
-/*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (1,8,1,'2020-11-01'),(2,9,1,'2020-11-02'),(3,9,1,'2020-11-03'),(4,9,1,'2020-11-04'),(5,10,2,'2020-11-05'),(6,10,2,'2020-11-06'),(7,10,3,'2020-11-07'),(8,10,3,'2020-11-08'),(9,11,1,'2020-11-09'),(10,11,1,'2020-11-10'),(11,11,1,'2020-11-11'),(12,12,2,'2020-11-12'),(13,12,2,'2020-11-13'),(14,12,3,'2020-11-14');
-/*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
+LOCK TABLES `tickets` WRITE;
+/*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
+INSERT INTO `tickets` VALUES (1,8,580),(2,9,350),(3,10,150),(4,11,800),(5,12,1080);
+/*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
