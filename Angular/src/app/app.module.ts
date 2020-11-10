@@ -17,6 +17,7 @@ import { QrcodeComponent } from './qrcode/qrcode.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { CreateeventComponent } from './createevent/createevent.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
     QrcodeComponent,
     SignInComponent,
     CreateaccountComponent,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
+    CreateeventComponent
   ],
   imports: [
     BrowserModule,
