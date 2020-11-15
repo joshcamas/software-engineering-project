@@ -33,3 +33,8 @@ ListEventsAPI.Create(app,database);
 CreateEventAPI.Create(app,database);
 GetEventAPI.Create(app, database);
 GetInventoryApi.Create(app, database);
+
+//This ensures refresh doesn't return get error
+app.get('/*', (req, res) => {
+  res.sendFile(__dirname + '/views/index.html');
+})
