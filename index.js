@@ -1,8 +1,7 @@
 const express = require('express');
-const app = express();
-const port = 3000;
 const mysql = require('mysql');
 const cors = require('cors');
+const passport = require('passport');
 
 const db = require('./services/database-service');
 
@@ -11,12 +10,15 @@ const CreateEventAPI = require('./api/create-event-api').CreateEventAPI;
 const GetEventAPI = require('./api/get-event-api').GetEventAPI;
 const GetInventoryApi = require('./api/get-inventory-api').GetInventoryAPI;
 
-
-//Startup webserver
+const app = express();
+const port = 3000;
 
 app.use(express.static('views'));
 app.use(cors());
+app.use(passport.initialize());
+app.use(passport.session());
 
+//Startup webserver
 app.listen(port, () => {
   console.log(`Tikit Server at http://localhost:${port}`)
 })
