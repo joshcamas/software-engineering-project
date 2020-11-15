@@ -1,6 +1,8 @@
 
 const util = require('util');
 
+var UserModel = require('../models/user-model').UserModel;
+
 class GetUserService
 {
     constructor(app,database)
@@ -9,10 +11,30 @@ class GetUserService
         this.database = database;
     }
 
-    CreateEvent(eventData,onComplete)
+    GetUserByUsername(username, onComplete)
     {
-        var command_template = "INSERT INTO `events` (`name`,`shortdesc`,`longdesc`,`price`, `headerimg`) VALUES ('%s','%s','%s', '%s', '%s');";
-        var command = util.format(command_template, eventData.name,eventData.shortdesc,eventData.longdesc,parseInt(eventData.price),eventData.headerimg);
+        var query = "SELECT * FROM `users` where `username`= '" + username + "';";
+        
+        this.database.connection.query(query, 
+            function (error, results, fields) {
+                if(error)
+                    throw error;
+
+                console.log(results);
+
+                if(results.length == 0)
+                    onComplete(null);
+                else
+                    onComplete(UserModel.Create(results[0]));
+
+            }
+        );
+    }
+
+    CreateUser (userData,onComplete)
+    {
+        var command_template = "INSERT INTO `users` (`username`,`password`,`email`) VALUES ('%s','%s','%s');";
+        var command = util.format(command_template, userData.username,userData.password,userData.email);
 
         this.database.connection.query(command, function (error, results, fields) {
             if(onComplete != null)
@@ -21,4 +43,4 @@ class GetUserService
     }
 }
 
-module.exports = { CreateEventService };
+module.exports = { GetUserService };

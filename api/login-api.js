@@ -1,47 +1,47 @@
-const LocalStrategy = require('passport-local').Strategy;
 
-class LoginAPI
-{
-    static Create(app,database)
-    {
-        app = app;
-        database = database;
+var GetUserService = require('../services/get-user-service').GetUserService;
 
-        //Implement local strategy (password + username)
-        passport.use(new LocalStrategy(
-            function(username, password, done) {
-              User.findOne({ username: username }, function(err, user) {
-                if (err) { return done(err); }
-                if (!user) {
-                  return done(null, false, { message: 'Incorrect username.' });
-                }
-                if (!user.validPassword(password)) {
-                  return done(null, false, { message: 'Incorrect password.' });
-                }
-                return done(null, user);
-              });
-            }
-        ));
+class LoginAPI {
+	static Create(app, database,passport) {
+		app = app;
+		database = database;
 
-        app.post('/login', 
-            passport.authenticate('local', 
-            {
-                successRedirect: '/',
-                failureRedirect: '/login',
-                failureFlash: true 
-            }),
-            function(req, res) {
+		app.post("/api/sign-in",
+			//If already logged in, then redirect
+			function (req, res, next)
+			{
+				if(req.isAuthenticated()) { return res.redirect('/account/'); }
+				else { return next();}
+			}, 
+			//Login
+			function (req, res, next) {
+				passport.authenticate({failureFlash: true},
+				function (err, user, info) {
 
-                res.redirect('/users/' + req.user.username);
+					if(user != false)
+					{
+						req.login(user, function(error) {
+							if (error) return next(error);
+							res.redirect('/account/');
+						});
+					}
+					else 
+						res.message(info)
+					
+				})(req, res, next);
+			}
+		);
 
-            }
-        );
+		app.get('/api/sign-out', function (req, res) {
+			req.logout();
+			res.redirect('/');
+		});
 
-        app.get('/logout', function(req, res){
-            req.logout();
-            res.redirect('/');
-        });
-    }
+		app.get('/api/test', passport.isLoggedIn, function (req, res)
+		{
+			console.log("IS LOGGED IN");
+		});
+	}
 
 }
 

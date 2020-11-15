@@ -1,6 +1,6 @@
 
 //Database Wrapper
-class Database
+class DatabaseService
 {
 	constructor(host,user,password,database)
 	{
@@ -39,4 +39,4 @@ class Database
 	
 }
 
-module.exports = { Database };
+module.exports = { DatabaseService };

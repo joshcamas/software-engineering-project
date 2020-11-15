@@ -1,22 +1,21 @@
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
-const passport = require('passport');
 
-const db = require('./services/database-service');
+const DatabaseService = require('./services/database-service').DatabaseService;
+const PassportService = require('./services/passport-service').PassportService;
 
 const ListEventsAPI = require('./api/list-events-api').ListEventsAPI;
 const CreateEventAPI = require('./api/create-event-api').CreateEventAPI;
 const GetEventAPI = require('./api/get-event-api').GetEventAPI;
-const GetInventoryApi = require('./api/get-inventory-api').GetInventoryAPI;
+const GetInventoryAPI = require('./api/get-inventory-api').GetInventoryAPI;
+const LoginAPI = require('./api/login-api').LoginAPI;
 
 const app = express();
 const port = 3000;
 
 app.use(express.static('views'));
 app.use(cors());
-app.use(passport.initialize());
-app.use(passport.session());
 
 //Startup webserver
 app.listen(port, () => {
@@ -24,17 +23,22 @@ app.listen(port, () => {
 })
 
 //Connect to database
-var database = new db.Database("localhost","admin","password123","tikit");
+var database = new DatabaseService("localhost","admin","password123","tikit");
 database.createConnection(mysql);
 database.connect()
+
+//Set up passport
+var passport = new PassportService(app, database);
 
 //Initialize API's
 ListEventsAPI.Create(app,database);
 CreateEventAPI.Create(app,database);
 GetEventAPI.Create(app, database);
-GetInventoryApi.Create(app, database);
+GetInventoryAPI.Create(app, database, passport);
+LoginAPI.Create(app, database, passport);
 
 //This ensures refresh doesn't return get error
-app.get('/*', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html');
+app.get('*', (req, res) => {
+	res.sendFile(__dirname + '/views/index.html');
 })
+  
