@@ -10,6 +10,7 @@ const CreateEventAPI = require('./api/create-event-api').CreateEventAPI;
 const GetEventAPI = require('./api/get-event-api').GetEventAPI;
 const GetInventoryAPI = require('./api/get-inventory-api').GetInventoryAPI;
 const LoginAPI = require('./api/login-api').LoginAPI;
+const CreateUserAPI = require('./api/create-user-api').CreateUserAPI;
 
 const app = express();
 const port = 3000;
@@ -36,6 +37,7 @@ CreateEventAPI.Create(app,database);
 GetEventAPI.Create(app, database);
 GetInventoryAPI.Create(app, database, passport);
 LoginAPI.Create(app, database, passport);
+CreateUserAPI.Create(app, database, passport);
 
 //This ensures refresh doesn't return get error
 app.get('*', (req, res) => {

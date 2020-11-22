@@ -20,8 +20,24 @@ class GetUserService
                 if(error)
                     throw error;
 
-                console.log(results);
+                if(results.length == 0)
+                    onComplete(null);
+                else
+                    onComplete(UserModel.Create(results[0]));
 
+            }
+        );
+    }
+
+    GetUserByEmail(email, onComplete)
+    {
+        var query = "SELECT * FROM `users` where `email`= '" + email + "';";
+        
+        this.database.connection.query(query, 
+            function (error, results, fields) {
+                if(error)
+                    throw error;
+                    
                 if(results.length == 0)
                     onComplete(null);
                 else
