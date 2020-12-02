@@ -3,23 +3,16 @@ var GetUserService = require('../services/get-user-service').GetUserService;
 
 class LoginAPI {
 	static Create(app, database,passport) {
-		app = app;
-		database = database;
 
 		app.post("/api/sign-in",
-			//If already logged in, then redirect
-			function (req, res, next)
-			{
-				if(req.isAuthenticated()) { return res.redirect('/account/'); }
-				else { return next();}
-			}, 
-			//Login
+			passport.isNotLoggedIn, 
 			function (req, res, next) {
 				passport.authenticate({failureFlash: true},
 				function (err, user, info) {
 
 					if(user != false)
 					{
+						console.log("Signing In");
 						req.login(user, function(error) {
 							if (error) return next(error);
 							res.redirect('/account/');
@@ -32,9 +25,16 @@ class LoginAPI {
 			}
 		);
 
-		app.get('/api/sign-out', function (req, res) {
+		app.get('/sign-out', function (req, res) {
+			console.log("Signing Out");
 			req.logout();
-			res.redirect('/');
+			res.redirect('/sign-in');
+		});
+
+		app.get('/api/sign-out', function (req, res) {
+			console.log("Signing Out");
+			req.logout();
+			res.redirect('/sign-in');
 		});
 
 		app.get('/api/test', passport.isLoggedIn, function (req, res)
