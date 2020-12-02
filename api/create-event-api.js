@@ -9,9 +9,11 @@ class CreateEventAPI
         app = app;
         database = database;
 
-        app.get('/api/create-event/', function(req, res) {
+        app.post('/api/create-event/', function(req, res) {
             
-            var event = new EventModel(res);
+            console.log("Creating Event, apparently");
+
+            var event = new EventModel(req.body);
             var service = new CreateEventService(app,database);
 
             service.CreateEvent(event,null)
