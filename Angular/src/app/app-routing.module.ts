@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent, canActivate : [AuthGuard]},
   {path: 'account', component: AccountComponent},
   {path: 'event/:id', component: EventComponent},
-  {path: 'inventory/:id', component: InventoryComponent},
+  {path: 'inventory', component: InventoryComponent},
   {path: 'qrcode', component: QrcodeComponent},
   {path: 'purchase', component: PurchaseComponent},
   {path: 'qrcode', component: QrcodeComponent},
