@@ -10,9 +10,12 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { CreateeventComponent } from './createevent/createevent.component';
+import { 
+  AuthGuardService as AuthGuard 
+} from './auth-guard.service';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, canActivate : [AuthGuard]},
   {path: 'account', component: AccountComponent},
   {path: 'event/:id', component: EventComponent},
   {path: 'inventory/:id', component: InventoryComponent},

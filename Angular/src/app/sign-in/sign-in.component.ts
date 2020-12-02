@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
   imgSrc = 'assets/tikit_logo.JPG';
-  constructor() { }
+  userEmail : String;
+  userPassword : String;
 
-  ngOnInit(): void {
+  constructor(private authService : AuthService, private router : Router) { }
+
+  ngOnInit() {
+
+  }
+
+  login(){
+    this.authService.validate(this.userEmail, this.userPassword)
+    .then((response) => {
+      this.authService.setUserInfo({'user' : response['user']});
+      this.router.navigate(['home']);
+
+    })
   }
 
 }
