@@ -23,7 +23,6 @@ export class SignInComponent implements OnInit {
     .then((response) => {
       this.authService.setUserInfo({'user' : response['user']});
       this.router.navigate(['home']);
-
     })
   }
 
