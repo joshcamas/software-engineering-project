@@ -22,8 +22,7 @@ class LoginAPI {
 					else 
 					{
 						console.log("Failed to login");
-						req.flash('message', info.message); 
-						res.status(204).send(); //TEMP
+						res.send(info.message);
 					}
 					
 				})(req, res, next);

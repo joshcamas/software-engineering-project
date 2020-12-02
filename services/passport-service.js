@@ -46,13 +46,13 @@ class PassportService
                 if(user == null)
                 {
                     console.log("No matching user");
-                    return done(null, false, { message: 'Incorrect username.' });
+                    return done(null, false, { message: 'Incorrect username or password' });
                 }
                 
                 if(!user.validPassword(password))
                 {
                     console.log("No matching password");
-                    return done(null, false, { message: 'Incorrect password.' });
+                    return done(null, false, { message: 'Incorrect username or password' });
                 }
                 
                 console.log("Successfully Logged in");

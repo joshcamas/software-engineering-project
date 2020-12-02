@@ -31,15 +31,14 @@ class CreateUserAPI {
                 if(username.length < 4)
                 {
                     console.log("Username too short");
-                    req.flash('error', 'Username must be at least 4 characters');
-                    res.status(204).send();
+                    res.send('Username must be at least 4 characters');
                     return;
                 }
 
                 if(email.length < 6)
                 {
                     console.log("Email too short");
-                    req.flash('error', 'Invalid email');
+                    res.send('Invalid email');
                     res.status(204).send();
                     return;
                 }
@@ -47,8 +46,7 @@ class CreateUserAPI {
                 if(password.length < 6)
                 {
                     console.log("Password too short");
-                    req.flash('error', 'Password must be at least 6 characters');
-                    res.status(204).send();
+                    res.send('Password must be at least 6 characters');
                     return;
                 }
                 
@@ -63,8 +61,7 @@ class CreateUserAPI {
                         if(user != null)
                         {
                             console.log('Username already exists');
-                            req.flash('error', 'Username already exists');
-                            res.status(204).send();
+                            res.send('Username is already used');
                             onComplete(true);
                             return;
                         }
@@ -80,8 +77,7 @@ class CreateUserAPI {
                         if(user != null)
                         {
                             console.log('Email already exists');
-                            req.flash('error', 'Email already exists');
-                            res.status(204).send();
+                            res.send('Email is already used');
                             onComplete(true);
                             return;
                         }
