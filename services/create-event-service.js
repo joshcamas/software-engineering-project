@@ -15,6 +15,9 @@ class CreateEventService
         var command = util.format(command_template, eventData.name,eventData.shortdesc,eventData.longdesc,parseInt(eventData.price),eventData.headerimg);
 
         this.database.connection.query(command, function (error, results, fields) {
+            if(error)
+                throw error;
+
             if(onComplete != null)
                 onComplete(results,error);
           });

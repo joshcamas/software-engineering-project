@@ -21,8 +21,20 @@ class EventModel
         model.longdesc = json["longdesc"];
         model.price = json["price"];
         model.headerimg = json["headerimg"];
-
+        
         return model;
+    }
+
+    static ToJSON(eventModel)
+    {
+        var json = {};
+        json.id = eventModel.id;
+        json.name = eventModel.name;
+        json.shortdesc = eventModel.shortdesc;
+        json.longdesc = eventModel.longdesc;
+        json.price = eventModel.price;
+        json.headerimg = eventModel.headerimg;
+        return json;
     }
 }
 

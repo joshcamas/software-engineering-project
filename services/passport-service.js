@@ -15,6 +15,7 @@ class PassportService
     {
         this.app = app;
         this.passport = passport;
+        this.database = database;
 
         app.use(session({
             secret: 'secret tikit',
@@ -61,11 +62,11 @@ class PassportService
         ));
 
         passport.serializeUser(function(user, done) {
-            done(null, user.username);
+            done(null, user);
         });
 
         passport.deserializeUser((username, done) => {
-            done(null, {username: username});
+            done(null, username);
         }); 
         
     }
@@ -80,9 +81,28 @@ class PassportService
         }
     }
 
+    isNotLoggedIn(req, res, next) {
+        if(req.isAuthenticated()) {
+            console.log("Is authenticated");
+            return res.redirect('/account');
+        } else {
+            console.log("Is not");
+            return next();
+        }
+    }
+
     authenticate(options, oncomplete)
     {
         return passport.authenticate("local",options, oncomplete);
+    }
+
+    getLoggedInUser(req,onComplete)
+    {
+        var service = new GetUserService(this.app, this.database);
+        service.GetUserByUsername(req.user.username, function (user) 
+        {
+            onComplete(user) 
+        });
     }
 }
 module.exports = { PassportService };

@@ -47,16 +47,6 @@ class GetUserService
         );
     }
 
-    CreateUser (userData,onComplete)
-    {
-        var command_template = "INSERT INTO `users` (`username`,`password`,`email`) VALUES ('%s','%s','%s');";
-        var command = util.format(command_template, userData.username,userData.password,userData.email);
-
-        this.database.connection.query(command, function (error, results, fields) {
-            if(onComplete != null)
-                onComplete(results,error);
-          });
-    }
 }
 
 module.exports = { GetUserService };
