@@ -73,20 +73,18 @@ class PassportService
 
     isLoggedIn(req, res, next) {
         if(req.isAuthenticated()) {
-            console.log("Is authenticated");
             return next();
         } else {
-            console.log("Is not");
+            console.log("Is not logged in, redirecting");
             return res.redirect('/sign-in');
         }
     }
 
     isNotLoggedIn(req, res, next) {
         if(req.isAuthenticated()) {
-            console.log("Is authenticated");
+            console.log("Is logged in, redirecting");
             return res.redirect('/account');
         } else {
-            console.log("Is not");
             return next();
         }
     }

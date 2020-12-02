@@ -11,8 +11,6 @@ class PurchaseTicketAPI
                 
                 var eventid = req.query.eventid;
                 
-                console.log(req.query.eventid);
-
                 if(typeof eventid === 'undefined')
                     eventid = req.eventid;
                 

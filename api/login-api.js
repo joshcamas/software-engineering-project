@@ -19,7 +19,11 @@ class LoginAPI {
 						});
 					}
 					else 
-						res.message(info)
+					{
+						console.log("Failed to login");
+						//res.flash('message', 'Failure!!'); 
+					}
+						//res.message(info)
 					
 				})(req, res, next);
 			}
