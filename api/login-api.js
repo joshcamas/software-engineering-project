@@ -1,6 +1,7 @@
 
 var GetUserService = require('../services/get-user-service').GetUserService;
 
+
 class LoginAPI {
 	static Create(app, database,passport) {
 
@@ -9,7 +10,7 @@ class LoginAPI {
 			function (req, res, next) {
 				passport.authenticate({failureFlash: true},
 				function (err, user, info) {
-
+					console.log(info);
 					if(user != false)
 					{
 						console.log("Signing In");
@@ -21,9 +22,9 @@ class LoginAPI {
 					else 
 					{
 						console.log("Failed to login");
-						//res.flash('message', 'Failure!!'); 
+						req.flash('message', info.message); 
+						res.status(204).send(); //TEMP
 					}
-						//res.message(info)
 					
 				})(req, res, next);
 			}
