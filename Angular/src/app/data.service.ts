@@ -19,8 +19,15 @@ export class DataService {
     return this._http.get<EventData>(this.apiUrl +  '/event', {params});
   }
 
+  getQRCode(id){
+    const params = new HttpParams().set('id', id);
+    const fullUrl = `${this.apiUrl}/get-qr/?ticketid=${params.toString().replace('id=', '')}`
+    return this._http.get<string>(fullUrl)
+  }
+
   getUserInventory(id){
     const params = new HttpParams().set('id', id);
+    console.log(this.apiUrl + '/inventory', {params})
     return this._http.get<InventoryData[]>(this.apiUrl + '/inventory', {params});
   }
 }

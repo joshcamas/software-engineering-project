@@ -18,7 +18,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { CreateaccountComponent } from './createaccount/createaccount.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { CreateeventComponent } from './createevent/createevent.component';
-
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -39,6 +39,7 @@ import { CreateeventComponent } from './createevent/createevent.component';
   ],
   imports: [
     BrowserModule,
+    QRCodeModule,
     HttpClientModule,
     AppRoutingModule
   ],
