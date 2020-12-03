@@ -6,24 +6,26 @@
           <div class="card card-signin my-5">
             <div class="card-body">
               <h5 class="card-title text-center">Event Details</h5>
-              <form class="form-signin">
+              <form class="form-signin" action="api/create-event" method="post" onselect="return false;">
                 <div class="form-label-group">
                   <label>Event Name:</label>
-                  <input type="text" id="eventname" class="form-control" placeholder="Event Name" required autofocus><br>
+                  <input type="text" id="eventname" name="name" class="form-control" placeholder="Event Name" required autofocus><br>
                   <label>Location:</label>
-                  <input type="text" id="location" class="form-control" placeholder="Location" required><br>
+                  <input type="text" id="location" name="location" class="form-control" placeholder="Location" required><br>
                   <label>Date:</label>
-                  <input type="date" id="date" class="form-control" placeholder="Date" required><br>
+                  <input type="date" id="date" name="date" class="form-control" placeholder="Date" required><br>
                   <label>Time:</label>
-                  <input type="time" id="time" class="form-control" placeholder="Time" required><br>
+                  <input type="time" id="time" name="time" class="form-control" placeholder="Time" required><br>
                   <label>Available Tickets:</label>
-                  <input type="number" id="availabletickets" class="form-control" placeholder="Available Tickets" required><br>
+                  <input type="number" id="availabletickets" name="availabletickets" class="form-control" placeholder="Available Tickets" required><br>
                   <label>Ticket Price (US Dollars):</label>
-                  <input type="number" id="price" class="form-control" placeholder="Price" required><br>
-                  <label>Event Description:</label>
-                  <textarea type="time" id="description" rows="10" class="form-control" placeholder="Description" required></textarea><br>
+                  <input type="number" id="price" name="price" class="form-control" placeholder="Price" required><br>
+                  <label>Long Event Description:</label>
+                  <textarea type="text" id="longdesc" name="longdesc" rows="10" class="form-control" placeholder="Long Description" required></textarea><br>
+                  <label>Short Event Description:</label>
+                  <textarea type="text" id="shortdesc" name="shortdesc" rows="2" class="form-control" placeholder="Short Description" required></textarea><br>
                   <label for="img">Event Image:</label><br>
-                  <input type="file" id="img" name="img" accept="image/*">
+                  <input type="file" id="img" name="headerimg" accept="image/*">
                 </div><br>
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">SUBMIT EVENT DETAILS</button>
                 <hr class="my-4">

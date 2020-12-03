@@ -11,15 +11,22 @@ class CreateEventService
 
     CreateEvent(eventData,onComplete)
     {
-        var command_template = "INSERT INTO `events` (`name`,`shortdesc`,`longdesc`,`price`, `headerimg`) VALUES ('%s','%s','%s', '%s', '%s');";
-        var command = util.format(command_template, eventData.name,eventData.shortdesc,eventData.longdesc,parseInt(eventData.price),eventData.headerimg);
+
+        if(isNaN(parseInt(eventData.price)))
+        {
+            onComplete(null,"Price is not valid");
+            return;
+        }
+
+        var command_template = "INSERT INTO `events` (`name`,`shortdesc`,`longdesc`,`price`, `owner`) VALUES ('%s','%s','%s','%s', %s);";
+        var command = util.format(command_template, eventData.name,eventData.shortdesc,eventData.longdesc,parseInt(eventData.price), parseInt(eventData.owner));
 
         this.database.connection.query(command, function (error, results, fields) {
             if(error)
                 throw error;
 
             if(onComplete != null)
-                onComplete(results,error);
+                onComplete(results);
           });
     }
 }

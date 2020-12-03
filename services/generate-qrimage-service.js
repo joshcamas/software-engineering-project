@@ -21,6 +21,11 @@ class GenerateQRCodeService
     {
         return ticketID.toString();
     }
+    
+    GetTicketIDFromQRCodeString(qrCodeStr)
+    {
+        return parseInt(qrCodeStr);
+    }
 }
 
 module.exports = { GenerateQRCodeService };

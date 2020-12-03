@@ -9,6 +9,7 @@ class EventModel
         this.longdesc = "";
         this.price = 0;
         this.headerimg = "";
+        this.owner = -1;
     }
 
     static Create(json)
@@ -21,20 +22,9 @@ class EventModel
         model.longdesc = json["longdesc"];
         model.price = json["price"];
         model.headerimg = json["headerimg"];
+        model.owner = json["owner"];
         
         return model;
-    }
-
-    static ToJSON(eventModel)
-    {
-        var json = {};
-        json.id = eventModel.id;
-        json.name = eventModel.name;
-        json.shortdesc = eventModel.shortdesc;
-        json.longdesc = eventModel.longdesc;
-        json.price = eventModel.price;
-        json.headerimg = eventModel.headerimg;
-        return json;
     }
 }
 
