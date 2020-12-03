@@ -16,8 +16,6 @@ class CreateEventAPI
             var rawEvent = req.body;
             rawEvent.owner = req.user.id;
             
-            //Hack!
-            rawEvent.headerimg = "event_" + rawEvent.id + ".png"
             var event = EventModel.Create(rawEvent);
             var service = new CreateEventService(app,database);
 
