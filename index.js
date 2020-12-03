@@ -1,8 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
-const fileUpload = require('express-fileupload');
-
 const DatabaseService = require('./services/database-service').DatabaseService;
 const PassportService = require('./services/passport-service').PassportService;
 
@@ -22,10 +20,6 @@ const port = 3000;
 
 app.use(express.static('views'));
 app.use(cors());
-
-app.use(fileUpload({
-  createParentPath: true
-}));
 
 //Startup webserver
 app.listen(port, () => {
