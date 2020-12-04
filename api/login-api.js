@@ -22,7 +22,7 @@ class LoginAPI {
 					else 
 					{
 						console.log("Failed to login");
-						resres.send({success:false,error:info.message});
+						res.send({success:false,error:info.message});
 					}
 					
 				})(req, res, next);
