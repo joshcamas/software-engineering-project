@@ -30,7 +30,6 @@ function simpleForm(query,url)
                     window.location.href = response.url;
                 else 
                 {
-                    console.log(response);
                     showError(response.error);
                 }
             },

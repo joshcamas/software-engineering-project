@@ -19,10 +19,12 @@ class PurchaseTicketAPI
                 console.log("Purchasing Ticket for " + userid + " and event ID " + eventid);
 
                 var service = new PurchaseTicketService(app,database);
-                service.PurchaseTicket(req.user.id,eventid,function()
+                service.PurchaseTicket(req.user.id,eventid,function(success,message)
                 {
-                    console.log("Successfully Purchased!");
-                    res.redirect("/account");
+                    if(success)
+                        res.send({success:true,url:'/account'});
+                    else 
+                        res.send({success:false,error:message});
                 });
 
         });

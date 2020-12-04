@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="css/index.css">
 
     <title>Create Event | Tik-IT</title>
+    <script>
+
+        $(document).ready(function () {
+          simpleForm("#form", "api/create-event");
+        });
+      
+      </script>
+
+
 </head>
 
 <body>
@@ -55,8 +64,7 @@
 
                         <div id="error" class="alert alert-danger" role="alert" style="display:none;"></div>
 
-
-                        <form class="form-signin" action="api/create-event" method="post" onselect="return false;">
+                        <form class="form-signin" id="form" enctype="multipart/form-data">
                             <div class="form-label-group">
                                 <label>Event Name:</label>
                                 <input type="text" id="eventname" name="name" class="form-control"
@@ -82,8 +90,8 @@
                                 <label>Short Event Description:</label>
                                 <textarea type="text" id="shortdesc" name="shortdesc" rows="2" class="form-control"
                                     placeholder="Short Description" required></textarea><br>
-                                <label for="img">Event Image:</label><br>
-                                <input type="file" id="img" name="headerimg" accept="image/*">
+                                <label for="headerimg">Event Image:</label><br>
+                                <input type="file" id="headerimg" name="headerimg" accept="image/*">
                             </div><br>
                             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">SUBMIT EVENT
                                 DETAILS</button>

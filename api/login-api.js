@@ -10,10 +10,8 @@ class LoginAPI {
 			function (req, res, next) {
 				passport.authenticate({failureFlash: true},
 				function (err, user, info) {
-					console.log(info);
 					if(user != false)
 					{
-						console.log("Signing In");
 						req.login(user, function(error) {
 							if (error) return next(error);
 							res.send({success:true,url:'/account'});
@@ -21,7 +19,6 @@ class LoginAPI {
 					}
 					else 
 					{
-						console.log("Failed to login");
 						res.send({success:false,error:info.message});
 					}
 					
@@ -30,13 +27,11 @@ class LoginAPI {
 		);
 
 		app.get('/sign-out', function (req, res) {
-			console.log("Signing Out");
 			req.logout();
 			res.redirect('/sign-in');
 		});
 
 		app.get('/api/sign-out', function (req, res) {
-			console.log("Signing Out");
 			req.logout();
 			res.redirect('/sign-in');
 		});

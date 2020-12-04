@@ -20,7 +20,10 @@
         
         $("#purchase-ticket").click(function ()
         {
-            $.get('/api/purchase-ticket/', { id: getUrlVars()["id"] });
+            $.get('/api/purchase-ticket/', { eventid: getUrlVars()["id"] },function (response)
+            {
+                window.location.href = response.url;
+            });
         });
     });
 
