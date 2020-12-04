@@ -7,24 +7,22 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/index.css">
 
-    <title>Purchase Ticket | Tik-IT</title>
+    <title>Ticket Scan | Tik-IT</title>
 </head>
 
 <script>
 
     $(document).ready(function () {
 
+        //Inventory
+        $.get("api/get-qr/",{ ticketid: getUrlVars()["id"] }, function (data) {
+            $("#ticket-qr").attr("src",data.img);
+        });
+
         $.get("api/event", { id: getUrlVars()["id"] }, function (data) {
-            $('#event-price').html((data.price / 100).toFixed(2));
+            $('#event-name').html("<a href='event?id=" + data.id +"'>" + data.name + "</a>");
         });
-        
-        $("#purchase-ticket").click(function ()
-        {
-            $.get('/api/purchase-ticket/', { eventid: getUrlVars()["id"] },function (response)
-            {
-                window.location.href = response.url;
-            });
-        });
+
     });
 
 </script>
@@ -66,17 +64,16 @@
 
     <!-- PAGE -->
     <div class="container">
-        <div class="row justify-content-center">
-            <div>
-                <p class="text-center font-weight-bold">
-                    Final Price: $<a id="event-price"></a>
-                </p>
-                <a id="purchase-ticket" class="nav-link">
-                    <button class="btn btn-primary shadow p-3 mb-2 bg-primary text-white">
-                        PURCHASE
-                    </button>
-                </a>
-            </div>
-        </div>
+        <br>
+
+        <div class="jumbotron">
+
+            <h3 class="display-5 text-center">Scan Ticket For <a id="event-name"></a></h3>
+
+            <img id="ticket-qr" class="img-fluid mx-auto d-block" style="width:90%; max-width:600px;">
+
+            <div class="text-center">
+            <a class="lead ">Please show this to the event coordinator</a></div>
+    </div>
     </div>
 </body>

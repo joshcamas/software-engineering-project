@@ -19,7 +19,7 @@ class PurchaseTicketService
                 throw error;
 
             if(onComplete != null)
-                onComplete(results,error);
+                onComplete(true);
           });
     }
 }

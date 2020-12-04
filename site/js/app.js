@@ -4,14 +4,15 @@ $( document ).ready(function() {
         //Not logged in
         if(data == "false")
         {
-            $('#nav-create-event').hide();
-            $('#nav-account').hide();
-            $('#nav-sign-out').hide();
+            $('#nav-sign-in').fadeIn(100);
         }
         else
         {
-            $('#nav-sign-in').hide();
+            $('#nav-create-event').fadeIn(100);
+            $('#nav-account').fadeIn(100);
+            $('#nav-sign-out').fadeIn(100);
         }
+        $('#nav-home').fadeIn(100);
     });
     
 });

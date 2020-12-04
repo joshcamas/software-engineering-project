@@ -17,8 +17,9 @@
         $.get("api/event", { id: getUrlVars()["id"] }, function (data) {
             $('#event-image').attr('src', "assets/Events/" + data.headerimg);
             $('#event-longdesc').html(data.longdesc);
+            $('#event-name').html(data.name);
             $('#event-price').html((data.price / 100).toFixed(2));
-            $('#purchase-button').attr('onclick',"location.href='/purchase?id="+data.id + "'");
+            $('#purchase-button').attr('onclick', "location.href='/purchase?id=" + data.id + "'");
         });
 
     });
@@ -27,62 +28,70 @@
 
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Tik-It</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg  navbar-dark bg-primary">
+    <a class="navbar-brand" href="#"><img src="assets/logo-icon-light.png" style="width:30px;height:30px" alt=""></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a href="/index.html" class="nav-link">Home</a>
-                </li>
-                <li id='nav-create-event' class="nav-item">
-                    <a href="/create-event" class="nav-link">Create Event</a>
-                </li>
-                <li id='nav-account' class="nav-item">
-                    <a href="/account" class="nav-link">Account</a>
-                </li>
-                <li id='nav-sign-in' class="nav-item">
-                    <a href="/sign-in" class="nav-link">Sign-In</a>
-                </li>
-                <li id='nav-sign-out' class="nav-item">
-                    <a href="/sign-out" class="nav-link">Sign-Out</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li id='nav-home' class="nav-item" style="display:none">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li id='nav-create-event' class="nav-item" style="display:none">
+          <a href="/create-event" class="nav-link">Create Event</a>
+        </li>
+        <li id='nav-account' class="nav-item" style="display:none">
+          <a href="/account" class="nav-link">Account</a>
+        </li>
+        <li id='nav-sign-in' class="nav-item" style="display:none">
+          <a href="/sign-in" class="nav-link">Sign In</a>
+        </li>
+        <li id='nav-sign-out' class="nav-item" style="display:none">
+          <a href="/sign-out" class="nav-link">Sign Out</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
 
     <!-- PAGE -->
     <div class="container">
+        <br>
+        <div class="row justify-content-center">
+            <h4 class="text-center">Event: <p id="event-name"></p>
+            </h4>
+        </div>
         <div class="row justify-content-center">
             <div class="shadow p-3 mb-5 bg-white rounded zoom eventData">
-                <img id="event-image">
-            </div>
-            <header>
-                <h2 class="text-center">Description</h2>
-                <p id="event-longdesc" class="font-italic">
-                </p>
-                <div class="font-weight-bold">
-                </div>
-            </header>
-            <div>
-                <p class="text-center font-weight-bold">
-                    Ticket Price: $<a id="event-price"></a>
-                </p>
-                <a id="purchase-ticket" class="nav-link">
-                    <button id="purchase-button" class="btn btn-primary shadow p-3 mb-2 bg-primary text-white">
-                        PURCHASE TICKET NOW
-                    </button>
-                </a>
+                <img class="img-fluid" id="event-image">
             </div>
         </div>
+
+        <div class="row justify-content-center">
+            <h4 class="text-center">Description</h4>
+            <p id="event-longdesc" class="font-italic"></p>
+        </div>
+
+        <div class="row justify-content-center">
+            <p class="text-center font-weight-bold">
+                Ticket Price: $<a id="event-price"></a>
+            </p>
+        </div>
+        <div class="row justify-content-center">
+
+            <a id="purchase-ticket" class="nav-link">
+                <button id="purchase-button" class="btn btn-primary shadow p-3 mb-2 bg-primary text-white">
+                    PURCHASE TICKET NOW
+                </button>
+            </a>
+        </div>
+
     </div>
 </body>
