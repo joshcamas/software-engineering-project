@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/index.css">
 
-    <title>Tik-IT</title>
+    <link rel="icon" 
+    type="image/png" 
+    href="assets/favicon.png">
+
+    <title>Event | TIK-IT</title>
 </head>
 
 <script>
@@ -20,6 +24,8 @@
             $('#event-name').html(data.name);
             $('#event-price').html((data.price / 100).toFixed(2));
             $('#purchase-button').attr('onclick', "location.href='/purchase?id=" + data.id + "'");
+
+            document.title = data.name + ' | TIK-IT';
         });
 
     });
