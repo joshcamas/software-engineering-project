@@ -23,10 +23,17 @@ class ScanPurchaseAPI
                 var gtservice = new GetTicketService(app,database);
                 gtservice.GetTicketByID(ticketID,function (ticket)
                 {
+                    if(ticket == null)
+                    {
+                        console.log("Ticket does not exist");
+                        res.send({success:false, error:"Ticket does not exist"});
+                        return;
+                    }
+
                     if(ticket.used)
                     {
                         console.log("Ticket already used");
-                        res.status(204).send("Ticket already used");
+                        res.send({success:false, error:"Ticket already used"});
                         return;
                     }
 
@@ -37,7 +44,7 @@ class ScanPurchaseAPI
                         if(event == null)
                         {
                             console.log("Event not found");
-                            res.status(204).send("Event Not Found");
+                            res.send({success:false, error:"Event Not Found"});
                             return;
                         }
 
@@ -47,7 +54,7 @@ class ScanPurchaseAPI
                         if(scannerUserId != event.owner)
                         {
                             console.log("Only event owner may scan tickets");
-                            res.status(204).send("Only event owner may scan tickets");
+                            res.send({success:false, error:"Only event owner may scan tickets"});
                             return;
                         }
                         
@@ -56,14 +63,14 @@ class ScanPurchaseAPI
                         {
                             if(success)
                             {
-                                console.log("Only event owner may scan tickets");
-                                res.status(204).send("Successfully Used Ticket!");
+                                console.log("Successfully used ticket!");
+                                res.send({success:true, message:"Successfully used ticket!"});
                                 return;
                             }
                             else 
                             {
                                 console.log("Scanning Failed, " + message);
-                                res.status(204).send("Scanning Failed, " + message);
+                                res.send({success:false, error:"Scanning Failed, " + message});
                                 return;
                             }
                         });

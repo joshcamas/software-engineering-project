@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/index.css">
 
-    <title>Create Account | Tik-IT</title>
+    <link rel="icon" 
+    type="image/png" 
+    href="assets/favicon.png">
+
+    <title>Create Account | TIK-IT</title>
 </head>
 
 <script>
@@ -19,46 +23,46 @@ $(document).ready(function () {
 </script>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Tik-It</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg  navbar-dark bg-primary">
+    <a class="navbar-brand" href="#"><img src="assets/logo-icon-light.png" style="width:30px;height:30px" alt=""></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a href="/index.html" class="nav-link">Home</a>
-                </li>
-                <li id='nav-create-event' class="nav-item">
-                    <a href="/create-event" class="nav-link">Create Event</a>
-                </li>
-                <li id='nav-account' class="nav-item">
-                    <a href="/account" class="nav-link">Account</a>
-                </li>
-                <li id='nav-sign-in' class="nav-item">
-                    <a href="/sign-in" class="nav-link">Sign-In</a>
-                </li>
-                <li id='nav-sign-out' class="nav-item">
-                    <a href="/sign-out" class="nav-link">Sign-Out</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li id='nav-home' class="nav-item" style="display:none">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li id='nav-create-event' class="nav-item" style="display:none">
+          <a href="/create-event" class="nav-link">Create Event</a>
+        </li>
+        <li id='nav-account' class="nav-item" style="display:none">
+          <a href="/account" class="nav-link">Account</a>
+        </li>
+        <li id='nav-sign-in' class="nav-item" style="display:none">
+          <a href="/sign-in" class="nav-link">Sign In</a>
+        </li>
+        <li id='nav-sign-out' class="nav-item" style="display:none">
+          <a href="/sign-out" class="nav-link">Sign Out</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
 
     <!-- PAGE -->
 
     <article class="card-body mx-auto" style="max-width: 400px;">
-
+        <br>
         <div class="text-center">
-            <img style="width: 300px" src="assets/tikit_logo.JPG">
-        </div>
+            <img style="width: 300px" src="assets/logo-colored.png">
+          </div>
         <h4 class="card-title mt-3 text-center">Create Account</h4>
         <p class="text-center">Get started with your free account</p>
 

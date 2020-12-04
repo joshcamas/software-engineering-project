@@ -12,19 +12,27 @@ class GenerateQRCodeService
     {
         var qrcodestr = this.CreateStringCodeFromTicket(ticketID);
 
-        QRCode.toDataURL(qrcodestr, function (err, url) {
+        var options = 
+        {
+            scale: 15,
+            color: {
+                dark:"#FFFFFFFF",
+                light:"#00000000"
+              }
+        }
+        QRCode.toDataURL(qrcodestr, options, function (err, url) {
             onComplete(url);
         })
     }
 
     CreateStringCodeFromTicket(ticketID)
     {
-        return ticketID.toString();
+        return "ticketqrcode_" + ticketID.toString();
     }
     
     GetTicketIDFromQRCodeString(qrCodeStr)
     {
-        return parseInt(qrCodeStr);
+        return parseInt(qrCodeStr.substring(13));
     }
 }
 

@@ -45,13 +45,11 @@ class PassportService
             {
                 if(user == null)
                 {
-                    console.log("No matching user");
                     return done(null, false, { message: 'Incorrect username or password' });
                 }
                 
                 if(!user.validPassword(password))
                 {
-                    console.log("No matching password");
                     return done(null, false, { message: 'Incorrect username or password' });
                 }
                 
@@ -75,14 +73,12 @@ class PassportService
         if(req.isAuthenticated()) {
             return next();
         } else {
-            console.log("Is not logged in, redirecting");
             return res.redirect('/sign-in');
         }
     }
 
     isNotLoggedIn(req, res, next) {
         if(req.isAuthenticated()) {
-            console.log("Is logged in, redirecting");
             return res.redirect('/account');
         } else {
             return next();

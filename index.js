@@ -2,6 +2,8 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const path = require('path');
+const http = require('http')
+const fs = require('fs')
 
 const DatabaseService = require('./services/database-service').DatabaseService;
 const PassportService = require('./services/passport-service').PassportService;
@@ -24,9 +26,18 @@ const port = 3000;
 app.use(express.static('site'));
 app.use(cors());
 
-//Startup webserver
-app.listen(port, () => {
-  console.log(`Tikit Server at http://localhost:${port}`)
+/*
+//Startup https webserver
+var server = https.createServer({
+  key: fs.readFileSync("sslcert/server.key", 'utf8'),
+  cert: fs.readFileSync("sslcert/server.cert", 'utf8')
+}, app);
+*/
+var server = http.createServer(app);
+
+//Start listening on port
+server.listen(port, () => {
+  console.log(`Tikit Server at https://localhost:${port}`)
 })
 
 //Connect to database
@@ -65,6 +76,10 @@ app.get('/create-event', passport.isLoggedIn, function(req,res) {
 
 app.get('/purchase', passport.isLoggedIn, function(req,res) {
   res.sendFile(path.join(__dirname+'/site/purchase.html'));
+});
+
+app.get('/ticket-scan', passport.isLoggedIn, function(req,res) {
+  res.sendFile(path.join(__dirname+'/site/ticket-scan.html'));
 });
 
 //Initialize API's

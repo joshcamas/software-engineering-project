@@ -2,40 +2,74 @@
 
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.bootpag.min.js"></script>
   <script src="js/app.js"></script>
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/index.css">
 
-  <title>Tik-IT</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="assets/favicon.png">
+
+  <title>TIK-IT | The Ultimate Event and Ticket Application</title>
 </head>
 
 <script>
 
+  var perPage = 3;
+  var events = [];
+
+  function setupNewEventPages() {
+    $('#newevent-page-selection').bootpag({
+      total: Math.ceil(events.length / perPage),
+      first: '←',
+      last: '→',
+      maxVisible: 3
+    }).on("page", function (event, num) {
+      drawNewEventPage(num);
+    });
+  }
+
   $(document).ready(function () {
 
     $.get("api/listevents", function (data) {
+      events = data;
 
-      var html = "";
+      //New events
+      setupNewEventPages();
+      drawNewEventPage(1);
 
-      for (var i = 0; i < data.length; i++)
-        html += getEventBlock(data[i]);
-
-      $('#event-list').html(html);
+      $("#sitefade").fadeIn(200);
     });
 
   });
 
+  function drawNewEventPage(page) {
+    startIndex = (page - 1) * perPage;
+    var html = "";
+
+    for (var i = 0; i < perPage; i++) {
+      if (events.length > i + startIndex)
+        html += getEventBlock(events[i + startIndex]);
+    }
+
+    $('#new-event-list').html(html);
+  }
+
   function getEventBlock(data) {
     var html = '<div class="col-md-4">';
-    html += '<div class="shadow p-3 mb-5 bg-white rounded zoom event">';
-    html += ' <div class="event-image text-center">';
+    html += '<div class="card text-white shadow p-3 mb-3 rounded event">';
+    html += '<div class="card-body">';
+    html += '<h4 class="card-title">' + data.name + '</h4>';
+    html += '<div class="event-image text-center">';
     html += '<a href="/event?id=' + data.id + '">';
-    html += '<img class="img-fluid" src="assets/Events/' + data.headerimg + '" />';
+    html += '<img class="img-fluid zoom" src="assets/Events/' + data.headerimg + '" />';
     html += '</a>';
     html += '</div>';
     html += '<div class="event-description">';
     html += data.shortdesc;
+    html += '</div>';
     html += '</div>';
     html += '</div>';
     html += '</div>';
@@ -44,10 +78,9 @@
 </script>
 
 <body>
-
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Tik-It</a>
+  <nav class="navbar navbar-expand-lg  navbar-dark bg-primary">
+    <a class="navbar-brand" href="#"><img src="assets/logo-icon-light.png" style="width:30px;height:30px" alt=""></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -55,20 +88,20 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+        <li id='nav-home' class="nav-item" style="display:none">
           <a href="/" class="nav-link">Home</a>
         </li>
-        <li id='nav-create-event' class="nav-item">
+        <li id='nav-create-event' class="nav-item" style="display:none">
           <a href="/create-event" class="nav-link">Create Event</a>
         </li>
-        <li id='nav-account' class="nav-item">
+        <li id='nav-account' class="nav-item" style="display:none">
           <a href="/account" class="nav-link">Account</a>
         </li>
-        <li id='nav-sign-in' class="nav-item">
-          <a href="/sign-in" class="nav-link">Sign-In</a>
+        <li id='nav-sign-in' class="nav-item" style="display:none">
+          <a href="/sign-in" class="nav-link">Sign In</a>
         </li>
-        <li id='nav-sign-out' class="nav-item">
-          <a href="/sign-out" class="nav-link">Sign-Out</a>
+        <li id='nav-sign-out' class="nav-item" style="display:none">
+          <a href="/sign-out" class="nav-link">Sign Out</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -79,12 +112,21 @@
   </nav>
 
   <!-- HOME -->
-  <div class="container">
+  <div class="container" id="sitefade" style="display:none;">
     <br>
-    <h4>Popular</h4><br>
-    <h6>Trending Now</h6>
+    <div class="text-center">
+      <img style="width: 300px" src="assets/logo-colored-text.png">
+    </div>
+    <br>
+    <h4>New Events </h4>
+    <br>
 
-    <div class="row" id="event-list"></div>
+      <div class="row" id="new-event-list"></div>
 
-  </div>
+      <div class="d-flex justify-content-center">
+        <div id="newevent-page-selection" class="pagination"></div>
+      </div>
+    </div>
+
+</div>
 </body>

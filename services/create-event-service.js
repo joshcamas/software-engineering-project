@@ -13,12 +13,6 @@ class CreateEventService
     {
         var _this = this;
 
-        if(isNaN(parseInt(eventData.price)))
-        {
-            onComplete(null,"Price is not valid");
-            return;
-        }
-
         var command_template = "INSERT INTO `events` (`name`,`shortdesc`,`longdesc`,`price`, `owner`) VALUES ('%s','%s','%s',%s, %s);";
         var command = util.format(command_template, eventData.name,eventData.shortdesc,eventData.longdesc,parseInt(eventData.price), parseInt(eventData.owner));
 

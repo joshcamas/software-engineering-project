@@ -11,21 +11,20 @@
     type="image/png" 
     href="assets/favicon.png">
 
-    <title>Event | TIK-IT</title>
+    <title>Scan Your Ticket | TIK-IT</title>
 </head>
 
 <script>
 
     $(document).ready(function () {
 
-        $.get("api/event", { id: getUrlVars()["id"] }, function (data) {
-            $('#event-image').attr('src', "assets/Events/" + data.headerimg);
-            $('#event-longdesc').html(data.longdesc);
-            $('#event-name').html(data.name);
-            $('#event-price').html((data.price / 100).toFixed(2));
-            $('#purchase-button').attr('onclick', "location.href='/purchase?id=" + data.id + "'");
+        //Inventory
+        $.get("api/get-qr/",{ ticketid: getUrlVars()["id"] }, function (data) {
+            $("#ticket-qr").attr("src",data.img);
+        });
 
-            document.title = data.name + ' | TIK-IT';
+        $.get("api/event", { id: getUrlVars()["id"] }, function (data) {
+            $('#event-name').html("<a href='event?id=" + data.id +"'>" + data.name + "</a>");
         });
 
     });
@@ -70,34 +69,15 @@
     <!-- PAGE -->
     <div class="container">
         <br>
-        <div class="row justify-content-center">
-            <h4 class="text-center">Event: <p id="event-name"></p>
-            </h4>
-        </div>
-        <div class="row justify-content-center">
-            <div class="shadow p-3 mb-5 bg-white rounded zoom eventData">
-                <img class="img-fluid" id="event-image">
-            </div>
-        </div>
 
-        <div class="row justify-content-center">
-            <h4 class="text-center">Description</h4>
-            <p id="event-longdesc" class="font-italic"></p>
-        </div>
+        <div class="jumbotron">
 
-        <div class="row justify-content-center">
-            <p class="text-center font-weight-bold">
-                Ticket Price: $<a id="event-price"></a>
-            </p>
-        </div>
-        <div class="row justify-content-center">
+            <h3 class="display-5 text-center">Scan Ticket For <a id="event-name"></a></h3>
 
-            <a id="purchase-ticket" class="nav-link">
-                <button id="purchase-button" class="btn btn-primary shadow p-3 mb-2 bg-primary text-white">
-                    PURCHASE TICKET NOW
-                </button>
-            </a>
-        </div>
+            <img id="ticket-qr" class="img-fluid mx-auto d-block" style="width:90%; max-width:600px;">
 
+            <div class="text-center">
+            <a class="lead ">Please show this to the event coordinator</a></div>
+    </div>
     </div>
 </body>

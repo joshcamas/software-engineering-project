@@ -1,5 +1,5 @@
 
-var multer  = require('multer');
+var multer  = require('multer')
 
 var CreateEventService = require('../services/create-event-service').CreateEventService;
 var EventModel = require('../models/event-model').EventModel;
@@ -11,8 +11,6 @@ class CreateEventAPI
         app.post('/api/create-event/', passport.isLoggedIn,
             function(req, res) {
             
-            console.log("Creating Event, apparently");
-
             var rawEvent = req.body;
             rawEvent.owner = req.user.id;
             
@@ -24,39 +22,36 @@ class CreateEventAPI
                 if(results == null)
                 {
                     console.log("Failed to create event: '" + message + "'")
-                    res.status(204).send(message);
+                    res.send({success:false,error:message});
                     return;
                 }
 
-                res.redirect('/event?id=' + results.insertId);
+                CreateEventAPI._uploadFile(req,res,function()
+                {
+                    res.send({success:true,url:'/event?id=' + results.insertId});
+                });
             });
-
-            //Upload image
-            
-
 
         });
     }
     
     static _uploadFile(req, res, next) 
     {
-        var upload = multer({ dest: 'views/assets/Events' })
+        var upload = multer({ dest: 'site/assets/events/' })
 
         upload.single('headerimg')(req, res, function (err) {
             if (err instanceof multer.MulterError) {
                 console.log("Failed to Upload Image: " + err);
 
-                res.status(204).send("Failed to Upload Image");
+                res.send({success:false,error:"Failed to Upload Image"});
                 return;
             } else if (err) {
                 console.log("Failed to Upload Image: Unknown Error");
 
-                res.status(204).send("Failed to Upload Image");
+                res.send({success:false,error:"Failed to Upload Image"});
                 return;
             }
             console.log("Successfully uploaded image");
-            console.log(req.file);
-            console.log(req.body);
             next();
           })
     }
