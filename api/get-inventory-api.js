@@ -54,7 +54,7 @@ class GetInventoryAPI
                     if(index + 1 >= results.length)
                         onComplete(fulltickets);
                     else
-                        processEvent(results,index+1,fulltickets,onComplete)
+                    processTicket(results,index+1,fulltickets,onComplete)
                 }
             );
         }
