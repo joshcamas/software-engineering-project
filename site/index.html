@@ -1,0 +1,90 @@
+<head>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/app.js"></script>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/index.css">
+
+  <title>Tik-IT</title>
+</head>
+
+<script>
+
+  $(document).ready(function () {
+
+    $.get("api/listevents", function (data) {
+
+      var html = "";
+
+      for (var i = 0; i < data.length; i++)
+        html += getEventBlock(data[i]);
+
+      $('#event-list').html(html);
+    });
+
+  });
+
+  function getEventBlock(data) {
+    var html = '<div class="col-md-4">';
+    html += '<div class="shadow p-3 mb-5 bg-white rounded zoom event">';
+    html += ' <div class="event-image text-center">';
+    html += '<a href="/event?id=' + data.id + '">';
+    html += '<img class="img-fluid" src="assets/Events/' + data.headerimg + '" />';
+    html += '</a>';
+    html += '</div>';
+    html += '<div class="event-description">';
+    html += data.shortdesc;
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+    return html;
+  }
+</script>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Tik-It</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li id='nav-create-event' class="nav-item">
+          <a href="/create-event" class="nav-link">Create Event</a>
+        </li>
+        <li id='nav-account' class="nav-item">
+          <a href="/account" class="nav-link">Account</a>
+        </li>
+        <li id='nav-sign-in' class="nav-item">
+          <a href="/sign-in" class="nav-link">Sign-In</a>
+        </li>
+        <li id='nav-sign-out' class="nav-item">
+          <a href="/sign-out" class="nav-link">Sign-Out</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <!-- HOME -->
+  <div class="container">
+    <br>
+    <h4>Popular</h4><br>
+    <h6>Trending Now</h6>
+
+    <div class="row" id="event-list"></div>
+
+  </div>
+</body>

@@ -1,0 +1,22 @@
+.zoom:hover{
+    transform: scale(1.075);
+}
+
+.event{
+    height: 350px;
+}
+
+.event-image{
+    height: 200px;
+}
+
+.image-height{
+    height: 100%;
+    width: auto;
+}
+
+.event-description{
+    margin-top: 10px;
+    height: 115px;
+    overflow: auto;
+}

@@ -16,7 +16,7 @@ class GetEventAPI
             service.GetEventByID(id,function(event,eventraw)
             {
                 if(event != null)
-                    res.send([eventraw]);
+                    res.send(event);
                 else 
                     res.send("");
             });

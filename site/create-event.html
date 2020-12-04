@@ -1,0 +1,93 @@
+<head>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+
+    <title>Create Event | Tik-IT</title>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Tik-It</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="/index.html" class="nav-link">Home</a>
+                </li>
+                <li id='nav-create-event' class="nav-item">
+                    <a href="/create-event" class="nav-link">Create Event</a>
+                </li>
+                <li id='nav-account' class="nav-item">
+                    <a href="/account" class="nav-link">Account</a>
+                </li>
+                <li id='nav-sign-in' class="nav-item">
+                    <a href="/sign-in" class="nav-link">Sign-In</a>
+                </li>
+                <li id='nav-sign-out' class="nav-item">
+                    <a href="/sign-out" class="nav-link">Sign-Out</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Event Details</h5>
+                        <form class="form-signin" action="api/create-event" method="post" onselect="return false;">
+                            <div class="form-label-group">
+                                <label>Event Name:</label>
+                                <input type="text" id="eventname" name="name" class="form-control"
+                                    placeholder="Event Name" required autofocus><br>
+                                <label>Location:</label>
+                                <input type="text" id="location" name="location" class="form-control"
+                                    placeholder="Location" required><br>
+                                <label>Date:</label>
+                                <input type="date" id="date" name="date" class="form-control" placeholder="Date"
+                                    required><br>
+                                <label>Time:</label>
+                                <input type="time" id="time" name="time" class="form-control" placeholder="Time"
+                                    required><br>
+                                <label>Available Tickets:</label>
+                                <input type="number" id="availabletickets" name="availabletickets" class="form-control"
+                                    placeholder="Available Tickets" required><br>
+                                <label>Ticket Price (US Dollars):</label>
+                                <input type="number" id="price" name="price" class="form-control" placeholder="Price"
+                                    required><br>
+                                <label>Long Event Description:</label>
+                                <textarea type="text" id="longdesc" name="longdesc" rows="10" class="form-control"
+                                    placeholder="Long Description" required></textarea><br>
+                                <label>Short Event Description:</label>
+                                <textarea type="text" id="shortdesc" name="shortdesc" rows="2" class="form-control"
+                                    placeholder="Short Description" required></textarea><br>
+                                <label for="img">Event Image:</label><br>
+                                <input type="file" id="img" name="headerimg" accept="image/*">
+                            </div><br>
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">SUBMIT EVENT
+                                DETAILS</button>
+                            <hr class="my-4">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

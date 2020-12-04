@@ -31,22 +31,21 @@ class CreateUserAPI {
                 if(username.length < 4)
                 {
                     console.log("Username too short");
-                    res.send('Username must be at least 4 characters');
+                    res.send({success:false,error:'Username must be at least 4 characters'});
                     return;
                 }
 
                 if(email.length < 6)
                 {
                     console.log("Email too short");
-                    res.send('Invalid email');
-                    res.status(204).send();
+                    res.send({success:false,error:'Invalid email'});
                     return;
                 }
 
                 if(password.length < 6)
                 {
                     console.log("Password too short");
-                    res.send('Password must be at least 6 characters');
+                    res.send({success:false,error:'Password must be at least 6 characters'});
                     return;
                 }
                 
@@ -61,7 +60,7 @@ class CreateUserAPI {
                         if(user != null)
                         {
                             console.log('Username already exists');
-                            res.send('Username is already used');
+                            res.send({success:false,error:'Username is already used'});
                             onComplete(true);
                             return;
                         }
@@ -77,7 +76,7 @@ class CreateUserAPI {
                         if(user != null)
                         {
                             console.log('Email already exists');
-                            res.send('Email is already used');
+                            res.send({success:false,error:'Email is already used'});
                             onComplete(true);
                             return;
                         }
@@ -103,8 +102,10 @@ class CreateUserAPI {
                         var createUser = new CreateUserService(app,database);
                         createUser.CreateUser(user,function () 
                         {
-                            console.log('Created Account');
-                            return res.redirect('/account/');
+                            req.login(user, function(error) {
+                                if (error) return next(error);
+                                res.send({success:true,url:'/account'});
+                            });
                         });
                     });
                 });

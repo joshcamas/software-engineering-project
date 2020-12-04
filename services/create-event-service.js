@@ -38,8 +38,6 @@ class CreateEventService
                 if(onComplete != null)
                     onComplete(results);
             });
-            
-
           });
     }
 }

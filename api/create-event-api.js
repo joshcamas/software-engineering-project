@@ -28,7 +28,7 @@ class CreateEventAPI
                     return;
                 }
 
-                res.redirect('/event/' + results.insertId);
+                res.redirect('/event?id=' + results.insertId);
             });
 
             //Upload image

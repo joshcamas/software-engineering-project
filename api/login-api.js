@@ -16,13 +16,13 @@ class LoginAPI {
 						console.log("Signing In");
 						req.login(user, function(error) {
 							if (error) return next(error);
-							res.redirect('/account/');
+							res.send({success:true,url:'/account'});
 						});
 					}
 					else 
 					{
 						console.log("Failed to login");
-						res.status(204).send(info.message);
+						resres.send({success:false,error:info.message});
 					}
 					
 				})(req, res, next);
