@@ -58,16 +58,28 @@
   }
 
   function getEventBlock(data) {
+    var popular = false;
+    var soldout = false;
+
     var html = '<div class="col-md-4">';
     html += '<div class="card text-white shadow p-3 mb-3 rounded event">';
     html += '<div class="card-body">';
     html += '<h4 class="card-title">' + data.name + '</h4>';
+    
     html += '<div class="event-image text-center">';
     html += '<a href="/event?id=' + data.id + '">';
     html += '<img class="img-fluid zoom" src="assets/Events/' + data.headerimg + '" />';
     html += '</a>';
     html += '</div>';
+    
     html += '<div class="event-description">';
+      
+    if(popular)
+      html += '<span class="badge badge-success event-badge">Popular</span>'
+      
+    if(soldout)
+      html += '<span class="badge badge-danger event-badge">Sold Out</span>'
+      
     html += data.shortdesc;
     html += '</div>';
     html += '</div>';

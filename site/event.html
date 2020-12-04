@@ -22,6 +22,7 @@
             $('#event-image').attr('src', "assets/Events/" + data.headerimg);
             $('#event-longdesc').html(data.longdesc);
             $('#event-name').html(data.name);
+            $('#event-datetime').html("November 3rd, 2020");
             $('#event-price').html((data.price / 100).toFixed(2));
             $('#purchase-button').attr('onclick', "location.href='/purchase?id=" + data.id + "'");
 
@@ -71,13 +72,14 @@
     <div class="container">
         <br>
         <div class="row justify-content-center">
-            <h4 class="text-center">Event: <p id="event-name"></p>
-            </h4>
+            <h2 class="text-center"><p id="event-name"></p>
+            </h2>
         </div>
         <div class="row justify-content-center">
-            <div class="shadow p-3 mb-5 bg-white rounded zoom eventData">
+            <div class="shadow p-3 mb-5 bg-secondary rounded zoom eventData">
                 <img class="img-fluid" id="event-image">
             </div>
+            <br>
         </div>
 
         <div class="row justify-content-center">
@@ -86,15 +88,28 @@
         </div>
 
         <div class="row justify-content-center">
-            <p class="text-center font-weight-bold">
-                Ticket Price: $<a id="event-price"></a>
-            </p>
+            <h4 class="text-center">Date & Time</h4>
+            <p id="event-datetime" class="font-italic"></p>
         </div>
+
+        <div class="row justify-content-center">
+            <h4 class="text-center">Ticket Price</h4>
+        </div>
+        
+        <div class="row justify-content-center">
+        <p id="event-price"></p>
+    </div>
         <div class="row justify-content-center">
 
             <a id="purchase-ticket" class="nav-link">
-                <button id="purchase-button" class="btn btn-primary shadow p-3 mb-2 bg-primary text-white">
+                <button id="purchase-button" class="btn btn-primary shadow p-3 mb-2 text-white">
                     PURCHASE TICKET NOW
+                </button>
+            </a>
+            
+            <a id="tickets-out" class="nav-link" style="display:none">
+                <button id="purchase-button" class="disabled btn btn-danger shadow p-3 mb-2 text-white">
+                    SOLD OUT
                 </button>
             </a>
         </div>
