@@ -17,6 +17,7 @@
 
   $(document).ready(function () {
     simpleForm("#form", "api/sign-in");
+    $("#sitefade").fadeIn(200)
   });
 
 </script>
@@ -58,7 +59,7 @@
 
   <!-- PAGE -->
 
-  <div class="container">
+  <div class="container" style="display:none;" id="sitefade">
     <br>
     <div class="text-center">
       <img style="width: 300px" src="assets/logo-colored.png">

@@ -31,7 +31,7 @@ class GetEventService
                 }
                 var event = results[0];
 
-                if(event.date != null)
+                if(event.date != null && typeof event.date == "string")
                 {
                     event.time = event.date.split(" ")[1];
                     event.date = event.date.split(" ")[0];
@@ -61,8 +61,7 @@ class GetEventService
         function processEvent(results,index,events,onComplete)
         {
             var event = results[index];
-
-            if(event.date != null)
+            if(event.date != null && typeof event.date == "string")
             {
                 event.time = event.date.split(" ")[1];
                 event.date = event.date.split(" ")[0];

@@ -34,8 +34,7 @@
   $(document).ready(function () {
 
     $.get("api/listevents", function (data) {
-      events = data;
-      console.log(events)
+      events = data.reverse();
       //New events
       setupNewEventPages();
       drawNewEventPage(1);
@@ -61,6 +60,7 @@
 
     var soldout = (data.soldcount >= data.ticketcount)
     var popular = !soldout && (data.soldcount / data.ticketcount > 0.75);
+    var free = (data.price <= 0)
 
     var html = '<div class="col-md-4">';
     html += '<div class="card text-white shadow p-3 mb-3 rounded event">';
@@ -74,6 +74,9 @@
     html += '</div>';
     
     html += '<div class="event-description">';
+      
+    if(free && !soldout)
+      html += '<span class="badge badge-primary event-badge">Free</span>'
       
     if(popular)
       html += '<span class="badge badge-success event-badge">Popular</span>'

@@ -17,6 +17,7 @@
 <script>
 
 $(document).ready(function () {
+    $("#sitefade").fadeIn(200);
     simpleForm("#form","api/sign-up");
 });
 
@@ -58,7 +59,7 @@ $(document).ready(function () {
 
     <!-- PAGE -->
 
-    <article class="card-body mx-auto" style="max-width: 400px;">
+    <article class="card-body mx-auto" style="max-width: 400px; display:none;" id="sitefade">
         <br>
         <div class="text-center">
             <img style="width: 300px" src="assets/logo-colored.png">

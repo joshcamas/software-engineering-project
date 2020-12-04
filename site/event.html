@@ -20,6 +20,7 @@
 
             var date = new Date(data.datetime);
 
+            var free = (data.price <= 0)
             var soldout = (data.soldcount >= data.ticketcount)
             var popular = !soldout && (data.soldcount / data.ticketcount >= 0.75);
 
@@ -29,6 +30,8 @@
                 name = '<span class="badge badge-danger event-badge">Sold Out</span>' + name;
             if(popular)
                 name = '<span class="badge badge-success event-badge">Popular</span>' + name;
+            if(free)
+                name = '<span class="badge badge-primary event-badge">Free</span>' + name;
 
             $('#event-name').html(name);
 
@@ -46,6 +49,7 @@
                 $('#purchase-button').attr('onclick', "location.href='/purchase?id=" + data.id + "'");
 
             document.title = data.name + ' | TIK-IT';
+            $("#sitefade").fadeIn(200)
         });
 
     });
@@ -89,7 +93,7 @@
     </nav>
 
     <!-- PAGE -->
-    <div class="container">
+    <div class="container" id="sitefade" style="display:none;">
         <br>
         <div class="row justify-content-center">
             <h2 class="text-center">
