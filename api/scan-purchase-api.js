@@ -8,7 +8,6 @@ class ScanPurchaseAPI
     static Create(app,database,passport)
     {
         app.get('/api/scan-purchase/', 
-            passport.isLoggedIn,
             function(req, res) {
                 
                 var qrcode= req.query.qrcode;
