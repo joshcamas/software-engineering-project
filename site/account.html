@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/index.css">
 
-    <link rel="icon" 
-    type="image/png" 
-    href="assets/favicon.png">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
 
     <title>Account | TIK-IT</title>
 </head>
@@ -21,29 +19,34 @@
         //Inventory
         $.get("api/inventory", function (data) {
 
+            var invcount = 0;
+
             //Normal inventory
             var html = "";
-            for (var i = data.length - 1; i >= 0; i--)
-                if (!data[i].used)
-                    html += addInventoryContent(data[i],true);
-
+            for (var i = data.length - 1; i >= 0; i--) {
+                if (!data[i].used) {
+                    invcount += 1;
+                    html += addInventoryContent(data[i], false);
+                }
+            }
             $("#inventory-tbody").html(html);
+            
+            if(invcount > 0)
+                $("#inventory").fadeIn(200);
 
             //Archive inventory
             var archcount = 0;
             var html = "";
-            for (var i = data.length - 1; i >= 0; i--)
-            {
-                if (data[i].used)
-                {
-                    html += addInventoryContent(data[i],false);
-                    archcount+=1;
+            for (var i = data.length - 1; i >= 0; i--) {
+                if (data[i].used) {
+                    html += addInventoryContent(data[i], true);
+                    archcount += 1;
                 }
             }
             $("#archive-tbody").html(html);
 
-            if(archcount > 0)
-            $("#archive").show();
+            if (archcount > 0)
+                $("#archive").fadeIn(200);
         });
 
         //Owned Events
@@ -51,28 +54,27 @@
 
             if (data.length == 0)
                 return;
-            
+
             var html = "";
             for (var i = data.length - 1; i >= 0; i--)
                 html += addEventContent(data[i]);
 
-            $("#ownedevents").show();
             $("#owned-tbody").html(html);
+            $("#ownedevents").fadeIn(200);
         });
 
     });
 
     function addInventoryContent(data, archived) {
-        var d = new Date(data.purchase_date);
-
+        var d = new Date(data.purchasedDate);
         var html = "<tr>";
-        html += "<td><a href='event?id=" + data.id + "'>" + data.name + "</a></td>";
-        html += "<td>" + data.shortdesc + "</td>";
-        html += "<td>$" + (data.price / 100).toFixed(2) + "</td>";
+        html += "<td><a href='event?id=" + data.event.id + "'>" + data.event.name + "</a></td>";
+        html += "<td>" + data.event.shortdesc + "</td>";
+        html += "<td>$" + (data.event.price / 100).toFixed(2) + "</td>";
         html += "<td class='text-nowrap'>" + d.toDateString() + "</td>";
 
-        if (archived)
-            html += "<td> <button type='button' class='btn btn-success' onclick='location.href=\"/ticket-scan?id=" + data.id + "\"'>Scan</button></td>";
+        if (!archived)
+            html += "<td> <button type='button' class='btn btn-success' onclick='location.href=\"/ticket-scan?tid=" + data.id + "&eid=" + data.event.id + "\"'>Scan</button></td>";
 
         html += "</tr>";
         return html;
@@ -84,7 +86,7 @@
         html += "<td>" + data.shortdesc + "</td>";
         html += "<td>$" + (data.price / 100).toFixed(2) + "</td>";
         //html += "<td>" + data.soldtickets + "</td>";
-        html += "<td> <button type='button' class='btn btn-primary' onclick='location.href=\"/event-scan/" + data.id + "\"'>Scan</button></td>";
+        html += "<td> <button type='button' class='btn btn-primary' onclick='location.href=\"/scanner?id=" + data.id + "\"'>Scan</button></td>";
         html += "</tr>";
         return html;
     }
@@ -92,58 +94,62 @@
 
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg  navbar-dark bg-primary">
-    <a class="navbar-brand" href="#"><img src="assets/logo-icon-light.png" style="width:30px;height:30px" alt=""></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg  navbar-dark bg-primary">
+        <a class="navbar-brand" href="#"><img src="assets/logo-icon-light.png" style="width:30px;height:30px"
+                alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li id='nav-home' class="nav-item" style="display:none">
-          <a href="/" class="nav-link">Home</a>
-        </li>
-        <li id='nav-create-event' class="nav-item" style="display:none">
-          <a href="/create-event" class="nav-link">Create Event</a>
-        </li>
-        <li id='nav-account' class="nav-item" style="display:none">
-          <a href="/account" class="nav-link">Account</a>
-        </li>
-        <li id='nav-sign-in' class="nav-item" style="display:none">
-          <a href="/sign-in" class="nav-link">Sign In</a>
-        </li>
-        <li id='nav-sign-out' class="nav-item" style="display:none">
-          <a href="/sign-out" class="nav-link">Sign Out</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li id='nav-home' class="nav-item" style="display:none">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                <li id='nav-create-event' class="nav-item" style="display:none">
+                    <a href="/create-event" class="nav-link">Create Event</a>
+                </li>
+                <li id='nav-account' class="nav-item" style="display:none">
+                    <a href="/account" class="nav-link">Account</a>
+                </li>
+                <li id='nav-sign-in' class="nav-item" style="display:none">
+                    <a href="/sign-in" class="nav-link">Sign In</a>
+                </li>
+                <li id='nav-sign-out' class="nav-item" style="display:none">
+                    <a href="/sign-out" class="nav-link">Sign Out</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
 
     <!-- PAGE -->
     <div class="container">
-        <br>
-        <h4>Purchased Tickets</h4><br>
 
-        <table class="table table-striped table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Short Desc</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Scan</th>
-                </tr>
-            </thead>
-            <tbody id="inventory-tbody">
+        <div id="inventory" style='display:none;'>
+            <br>
+            <h4>Purchased Tickets</h4><br>
 
-            </tbody>
-        </table>
+            <table class="table table-striped table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Event Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Purchase Date</th>
+                        <th scope="col">Scan</th>
+                    </tr>
+                </thead>
+                <tbody id="inventory-tbody">
+
+                </tbody>
+            </table>
+        </div>
 
         <div id="archive" style='display:none;'>
             <br>
@@ -153,9 +159,9 @@
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Short Desc</th>
+                        <th scope="col">Event Description</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Date</th>
+                        <th scope="col">Purchase Date</th>
                     </tr>
                 </thead>
                 <tbody id="archive-tbody">
@@ -171,7 +177,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Short Desc</th>
+                        <th scope="col">Event Description</th>
                         <th scope="col">Price</th>
                         <!--<th scope="col">Sold Tickets</th>-->
                         <th scope="col">Scan</th>

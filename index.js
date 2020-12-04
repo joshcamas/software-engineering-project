@@ -82,6 +82,10 @@ app.get('/ticket-scan', passport.isLoggedIn, function(req,res) {
   res.sendFile(path.join(__dirname+'/site/ticket-scan.html'));
 });
 
+app.get('/scanner', passport.isLoggedIn, function(req,res) {
+  res.sendFile(path.join(__dirname+'/site/scanner.html'));
+});
+
 //Initialize API's
 ListEventsAPI.Create(app,database);
 CreateEventAPI.Create(app,database,passport);

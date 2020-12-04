@@ -10,6 +10,13 @@ class EventModel
         this.price = 0;
         this.headerimg = "";
         this.owner = -1;
+        this.datetime = null;
+        this.soldcount = 0;
+    }
+
+    sqlDatetime()
+    {
+        return this.datetime.toISOString().slice(0, 19).replace('T', ' ');
     }
 
     static Create(json)
@@ -23,7 +30,27 @@ class EventModel
         model.price = json["price"];
         model.headerimg = json["headerimg"];
         model.owner = json["owner"];
+        model.ticketcount = json["ticketcount"];
+
+        if(typeof json["soldcount"] != 'undefined')
+            model.soldcount = json["soldcount"];
         
+        if(json["date"] != null)
+        {
+            model.datetime = new Date(json["date"]);
+        }
+
+        if(json["date"] != null && json["time"] != null)
+        {
+            var tsplit = json["time"].split(":");
+    
+            if(tsplit.length == 2 || tsplit.length == 3)
+            {
+                model.datetime.setHours(parseInt(tsplit[0]))
+                model.datetime.setMinutes(parseInt(tsplit[1]))
+            }
+    
+        }
         return model;
     }
 }

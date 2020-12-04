@@ -7,16 +7,18 @@ class TicketModel
         this.eventId = -1;
         this.userId = -1;
         this.used = false;
+        this.purchasedDate = 0;
     }
 
     static Create(json)
     {
-        var model = new EventModel();
+        var model = new TicketModel();
 
         model.id = json["id"];
         model.eventId = json["event_id"];
         model.userId = json["user_id"];
         model.used = json["used"];
+        model.purchasedDate = json["purchase_date"];
 
         return model;
     }

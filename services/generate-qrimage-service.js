@@ -14,11 +14,11 @@ class GenerateQRCodeService
 
         var options = 
         {
-            scale: 15,
+            scale: 15,/*
             color: {
                 dark:"#FFFFFFFF",
                 light:"#00000000"
-              }
+              }*/
         }
         QRCode.toDataURL(qrcodestr, options, function (err, url) {
             onComplete(url);
@@ -27,12 +27,18 @@ class GenerateQRCodeService
 
     CreateStringCodeFromTicket(ticketID)
     {
-        return "ticketqrcode_" + ticketID.toString();
+        if(ticketID == null)
+            return null;
+        
+        return "ticketqrcode" + ticketID.toString();
     }
     
     GetTicketIDFromQRCodeString(qrCodeStr)
     {
-        return parseInt(qrCodeStr.substring(13));
+        if(qrCodeStr == null)
+            return null;
+        
+        return parseInt(qrCodeStr.substring(12));
     }
 }
 

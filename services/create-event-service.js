@@ -13,8 +13,15 @@ class CreateEventService
     {
         var _this = this;
 
-        var command_template = "INSERT INTO `events` (`name`,`shortdesc`,`longdesc`,`price`, `owner`) VALUES ('%s','%s','%s',%s, %s);";
-        var command = util.format(command_template, eventData.name,eventData.shortdesc,eventData.longdesc,parseInt(eventData.price), parseInt(eventData.owner));
+        var command_template = "INSERT INTO `events` (`name`,`shortdesc`,`longdesc`,`price`, `owner`, `ticketcount`, `date`) VALUES ('%s','%s','%s',%s, %s,'%s', '%s');";
+        var command = util.format(command_template, 
+            eventData.name,
+            eventData.shortdesc,
+            eventData.longdesc,
+            parseInt(eventData.price*100),
+            parseInt(eventData.owner), 
+            parseInt(eventData.ticketcount),
+            eventData.sqlDatetime());
 
         this.database.connection.query(command, function (error, results, fields) {
             if(error)

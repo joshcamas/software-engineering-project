@@ -19,11 +19,11 @@
     $(document).ready(function () {
 
         //Inventory
-        $.get("api/get-qr/",{ ticketid: getUrlVars()["id"] }, function (data) {
+        $.get("api/get-qr/",{ ticketid: getUrlVars()["tid"] }, function (data) {
             $("#ticket-qr").attr("src",data.img);
         });
 
-        $.get("api/event", { id: getUrlVars()["id"] }, function (data) {
+        $.get("api/event", { id: getUrlVars()["eid"] }, function (data) {
             $('#event-name').html("<a href='event?id=" + data.id +"'>" + data.name + "</a>");
         });
 

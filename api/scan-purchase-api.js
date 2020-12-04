@@ -8,13 +8,12 @@ class ScanPurchaseAPI
     static Create(app,database,passport)
     {
         app.get('/api/scan-purchase/', 
+            passport.isLoggedIn,
             function(req, res) {
                 
                 var qrcode= req.query.qrcode;
-                
-                if(typeof qrcode === 'undefined')
-                    qrcode = req.qrcode;
-                
+                var matchingevent = req.query.eventid;
+
                 //Convert qr code to ticket code
                 var qrservice = new GenerateQRCodeService();
                 var ticketID = qrservice.GetTicketIDFromQRCodeString(qrcode);
@@ -30,6 +29,13 @@ class ScanPurchaseAPI
                         return;
                     }
 
+                    if(ticket.eventId != matchingevent)
+                    {
+                        console.log("Ticket is for a different event (Ticket Event ID:" + ticket.eventId +")");
+                        res.send({success:false, error:"Ticket is for a different event"});
+                        return;
+                    }
+
                     if(ticket.used)
                     {
                         console.log("Ticket already used");
@@ -39,11 +45,11 @@ class ScanPurchaseAPI
 
                     //Get event ID
                     var geservice = new GetEventService(app, database);
-                    geservice.GetEventByID(ticket.eventid,function(event,eventraw)
+                    geservice.GetEventByID(ticket.eventId,function(event,eventraw)
                     {
                         if(event == null)
                         {
-                            console.log("Event not found");
+                            console.log("Event not found (Event:" + ticket.eventId);
                             res.send({success:false, error:"Event Not Found"});
                             return;
                         }

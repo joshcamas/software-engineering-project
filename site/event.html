@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/index.css">
 
-    <link rel="icon" 
-    type="image/png" 
-    href="assets/favicon.png">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
 
     <title>Event | TIK-IT</title>
 </head>
@@ -19,12 +17,33 @@
     $(document).ready(function () {
 
         $.get("api/event", { id: getUrlVars()["id"] }, function (data) {
+
+            var date = new Date(data.datetime);
+
+            var soldout = (data.soldcount >= data.ticketcount)
+            var popular = !soldout && (data.soldcount / data.ticketcount >= 0.75);
+
+            var name= data.name;
+
+            if(soldout)
+                name = '<span class="badge badge-danger event-badge">Sold Out</span>' + name;
+            if(popular)
+                name = '<span class="badge badge-success event-badge">Popular</span>' + name;
+
+            $('#event-name').html(name);
+
             $('#event-image').attr('src', "assets/Events/" + data.headerimg);
-            $('#event-longdesc').html(data.longdesc);
-            $('#event-name').html(data.name);
-            $('#event-datetime').html("November 3rd, 2020");
-            $('#event-price').html((data.price / 100).toFixed(2));
-            $('#purchase-button').attr('onclick', "location.href='/purchase?id=" + data.id + "'");
+            $('#event-longdesc').html( data.longdesc);
+            $('#event-datetime').html(date.toUTCString());
+            $('#event-price').html("$" + (data.price / 100).toFixed(2));
+
+            if(soldout)
+            {
+                $('#tickets-out').show();
+                $('#purchase-ticket').hide();
+            }
+            else
+                $('#purchase-button').attr('onclick', "location.href='/purchase?id=" + data.id + "'");
 
             document.title = data.name + ' | TIK-IT';
         });
@@ -35,44 +54,46 @@
 
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg  navbar-dark bg-primary">
-    <a class="navbar-brand" href="#"><img src="assets/logo-icon-light.png" style="width:30px;height:30px" alt=""></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg  navbar-dark bg-primary">
+        <a class="navbar-brand" href="#"><img src="assets/logo-icon-light.png" style="width:30px;height:30px"
+                alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li id='nav-home' class="nav-item" style="display:none">
-          <a href="/" class="nav-link">Home</a>
-        </li>
-        <li id='nav-create-event' class="nav-item" style="display:none">
-          <a href="/create-event" class="nav-link">Create Event</a>
-        </li>
-        <li id='nav-account' class="nav-item" style="display:none">
-          <a href="/account" class="nav-link">Account</a>
-        </li>
-        <li id='nav-sign-in' class="nav-item" style="display:none">
-          <a href="/sign-in" class="nav-link">Sign In</a>
-        </li>
-        <li id='nav-sign-out' class="nav-item" style="display:none">
-          <a href="/sign-out" class="nav-link">Sign Out</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li id='nav-home' class="nav-item" style="display:none">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                <li id='nav-create-event' class="nav-item" style="display:none">
+                    <a href="/create-event" class="nav-link">Create Event</a>
+                </li>
+                <li id='nav-account' class="nav-item" style="display:none">
+                    <a href="/account" class="nav-link">Account</a>
+                </li>
+                <li id='nav-sign-in' class="nav-item" style="display:none">
+                    <a href="/sign-in" class="nav-link">Sign In</a>
+                </li>
+                <li id='nav-sign-out' class="nav-item" style="display:none">
+                    <a href="/sign-out" class="nav-link">Sign Out</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
 
     <!-- PAGE -->
     <div class="container">
         <br>
         <div class="row justify-content-center">
-            <h2 class="text-center"><p id="event-name"></p>
+            <h2 class="text-center">
+                <p id="event-name"></p>
             </h2>
         </div>
         <div class="row justify-content-center">
@@ -89,16 +110,18 @@
 
         <div class="row justify-content-center">
             <h4 class="text-center">Date & Time</h4>
-            <p id="event-datetime" class="font-italic"></p>
         </div>
 
         <div class="row justify-content-center">
+            <p id="event-datetime"></p>
+        </div>
+        <div class="row justify-content-center">
             <h4 class="text-center">Ticket Price</h4>
         </div>
-        
+
         <div class="row justify-content-center">
-        <p id="event-price"></p>
-    </div>
+            <p id="event-price"></p>
+        </div>
         <div class="row justify-content-center">
 
             <a id="purchase-ticket" class="nav-link">
@@ -106,7 +129,7 @@
                     PURCHASE TICKET NOW
                 </button>
             </a>
-            
+
             <a id="tickets-out" class="nav-link" style="display:none">
                 <button id="purchase-button" class="disabled btn btn-danger shadow p-3 mb-2 text-white">
                     SOLD OUT

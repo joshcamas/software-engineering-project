@@ -35,7 +35,7 @@
 
     $.get("api/listevents", function (data) {
       events = data;
-
+      console.log(events)
       //New events
       setupNewEventPages();
       drawNewEventPage(1);
@@ -58,8 +58,9 @@
   }
 
   function getEventBlock(data) {
-    var popular = false;
-    var soldout = false;
+
+    var soldout = (data.soldcount >= data.ticketcount)
+    var popular = !soldout && (data.soldcount / data.ticketcount > 0.75);
 
     var html = '<div class="col-md-4">';
     html += '<div class="card text-white shadow p-3 mb-3 rounded event">';
