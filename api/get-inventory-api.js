@@ -42,7 +42,6 @@ class GetInventoryAPI
         function processTicket(results,index,fulltickets,onComplete)
         {
             var ticket = fulltickets[index];
-            console.log("looking for event with id " + ticket.eventId);
 
             var query = "SELECT * FROM `events` where `id`= '" + ticket.eventId + "';";
             database.connection.query(query, 

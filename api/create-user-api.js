@@ -22,9 +22,6 @@ class CreateUserAPI {
                 var password = req.body["password"];
                 var email = req.body["email"];
 
-                console.log("USername " + username);
-                console.log("Password " + password);
-
                 //res.message("Hellow :)");
                 
                 //Make sure username and password are of suitable length
