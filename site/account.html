@@ -31,8 +31,11 @@
             }
             $("#inventory-tbody").html(html);
             
-            if(invcount > 0)
-                $("#inventory").fadeIn(200);
+            
+            $("#inventory").fadeIn(200);
+            
+            if(invcount == 0)
+                $("#empty-inventory").fadeIn(200);
 
             //Archive inventory
             var archcount = 0;
@@ -130,7 +133,6 @@
 
     <!-- PAGE -->
     <div class="container">
-
         <div id="inventory" style='display:none;'>
             <br>
             <h4>Purchased Tickets</h4><br>
@@ -149,6 +151,10 @@
 
                 </tbody>
             </table>
+        </div>
+        
+        <div id="empty-inventory" style='display:none;'>
+            <div id="error" class="alert alert-primary" role="alert">No purchased tickets to display!</div>
         </div>
 
         <div id="archive" style='display:none;'>
