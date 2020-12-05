@@ -20,7 +20,7 @@ class GetInventoryAPI
                         
                     if(results.length == 0)
                     {
-                        onComplete([],results);
+                        res.send([]);
                         return;
                     }
 
